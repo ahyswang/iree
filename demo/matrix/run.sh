@@ -1,0 +1,28 @@
+IREE_COMPILE=`pwd`/../../../iree-build/tools/iree-compile
+IREE_RUN_MODULE=`pwd`/../../../iree-build/tools/iree-run-module
+IREE_BENCHMARK_MODULE=`pwd`/../../../iree-build/tools/iree-benchmark-module
+IREE_DIR=`pwd`/../../iree/
+
+$IREE_COMPILE --iree-hal-target-backends=llvm-cpu --iree-hal-target-device=x86 matmul.mlir \
+--mlir-disable-threading \
+--mlir-elide-elementsattrs-if-larger=10 \
+--mlir-print-ir-after-all \
+--mlir-print-ir-after-change \
+--mlir-print-ir-before-all -o log.vmbf &> log.txt
+
+$IREE_RUN_MODULE --device="local-task://" \
+--module=log.vmbf \
+--function=matmul_accumulate_8x8xi8_times_8x8xi8_into_8x8xi32 \
+--input="8x8xi8=0" \
+--input="8x8xi8=0" \
+--input="8x8xi32=0"
+
+$IREE_BENCHMARK_MODULE --device="local-task://" \
+--module=log.vmbf \
+--function=matmul_accumulate_8x8xi8_times_8x8xi8_into_8x8xi32 \
+--input="8x8xi8=0" \
+--input="8x8xi8=0" \
+--input="8x8xi32=0"
+
+
+# https://zhuanlan.zhihu.com/p/708512905

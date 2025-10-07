@@ -1,0 +1,1154 @@
+// -----// IR Dump Before AutoInputConversionPipelinePass (iree-auto-input-conversion) //----- //
+module {
+}
+
+
+// -----// IR Dump Before IREEImportPublicPass (iree-import-public) //----- //
+module {
+}
+
+
+// -----// IR Dump Before ImportMLProgramPass (iree-import-ml-program) //----- //
+module {
+}
+
+
+// -----// IR Dump Before SanitizeModuleNamesPass (iree-sanitize-module-names) //----- //
+module {
+}
+
+
+// -----// IR Dump Before ConvertShardToFlowPass (iree-convert-shard-to-flow) //----- //
+module {
+}
+
+
+// -----// IR Dump Before DemoteF64ToF32Pass (iree-input-conversion-demote-f64-to-f32) //----- //
+module {
+}
+
+
+// -----// IR Dump Before mlir::iree_compiler::IREE::ABI::ConvertStreamableOpsPass (iree-abi-convert-streamable-ops) //----- //
+module {
+}
+
+
+// -----// IR Dump Before mlir::iree_compiler::IREE::ABI::WrapEntryPointsPass (iree-abi-wrap-entry-points) //----- //
+module {
+}
+
+
+// -----// IR Dump Before Inliner (inline) //----- //
+module {
+}
+
+
+// -----// IR Dump Before SymbolDCE (symbol-dce) //----- //
+module {
+}
+
+
+// -----// IR Dump Before AssignLegacyTargetDevicesPass (iree-hal-assign-legacy-target-devices) //----- //
+module {
+}
+
+
+// -----// IR Dump After AssignLegacyTargetDevicesPass (iree-hal-assign-legacy-target-devices) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {hal.device.targets = [#device_target_local]} {
+}
+
+
+// -----// IR Dump Before AssignTargetDevicesPass (iree-hal-assign-target-devices) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {hal.device.targets = [#device_target_local]} {
+}
+
+
+// -----// IR Dump Before MaterializeTargetDevicesPass (iree-hal-materialize-target-devices) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {hal.device.targets = [#device_target_local]} {
+}
+
+
+// -----// IR Dump After MaterializeTargetDevicesPass (iree-hal-materialize-target-devices) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before ResolveDevicePromisesPass (iree-hal-resolve-device-promises) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before ResolveDeviceAliasesPass (iree-hal-resolve-device-aliases) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before VerifyDevicesPass (iree-hal-verify-devices) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before EraseUnusedLinalgOperandsPass (iree-global-opt-erase-unused-linalg-operands) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before ExpandTensorShapesPass (iree-global-opt-expand-tensor-shapes) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FoldUnitExtentDimsPass (iree-dispatch-creation-fold-unit-extent-dims) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before ConvertStridedContractionToContractionPass (iree-global-opt-convert-strided-contraction-to-contraction) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before MaterializeHomogeneousEncodingsPass (iree-global-opt-materialize-homogeneous-encodings) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before MaterializeHostEncodingPass (iree-codegen-materialize-host-encoding) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before CanonicalizePass (iree-flow-canonicalize) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before CSE (cse) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before SimplifyPackUnpackPass (iree-global-opt-simplify-pack-unpack) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FoldGlobalsPass (iree-util-fold-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before IPOPass (iree-util-ipo) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before HoistIntoGlobalsPass (iree-util-hoist-into-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before JitGlobalsPass (iree-consteval-jit-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before TensorPadToTensorInsertSlicePass (iree-dispatch-creation-tensor-pad-to-tensor-insert-slice) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FixedPointIteratorPass (iree-util-fixed-point-iterator) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FoldGlobalsPass (iree-util-fold-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {iree.fixedpoint.iteration = 0 : index, stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FuseGlobalsPass (iree-util-fuse-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {iree.fixedpoint.iteration = 0 : index, stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before IPOPass (iree-util-ipo) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {iree.fixedpoint.iteration = 0 : index, stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before HoistIntoGlobalsPass (iree-util-hoist-into-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before HoistIntoGlobalsPass (iree-util-hoist-into-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before VerifyInputLegalityPass (iree-verify-input-legality) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before OutlineDispatchExternsPass (iree-flow-outline-dispatch-externs) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before OutlineDispatchRegionsPass (iree-flow-outline-dispatch-regions) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before AnnotateDispatchesPass (iree-flow-annotate-dispatches) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before DeduplicateExecutablesPass (iree-flow-deduplicate-executables) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FixedPointIteratorPass (iree-util-fixed-point-iterator) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before OutlineConstantsPass (iree-flow-outline-constants) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {iree.fixedpoint.iteration = 0 : index, stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FoldGlobalsPass (iree-util-fold-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {iree.fixedpoint.iteration = 0 : index, stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FuseGlobalsPass (iree-util-fuse-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {iree.fixedpoint.iteration = 0 : index, stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before IPOPass (iree-util-ipo) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {iree.fixedpoint.iteration = 0 : index, stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before SymbolDCE (symbol-dce) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before VerifyInputPass (iree-stream-verify-input) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FoldGlobalsPass (iree-util-fold-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FuseGlobalsPass (iree-util-fuse-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before IPOPass (iree-util-ipo) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before CloneToConsumersPass (iree-stream-clone-to-consumers) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before ConvertToStreamPass (iree-stream-conversion) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before VerifyLoweringToTensorsPass (iree-stream-verify-lowering-to-tensors) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before Inliner (inline) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FoldGlobalsPass (iree-util-fold-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FuseGlobalsPass (iree-util-fuse-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before IPOPass (iree-util-ipo) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before CombineInitializersPass (iree-util-combine-initializers) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before SpecializeEncodingsPass (iree-stream-specialize-encodings) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before MaterializeEncodingsPass (iree-stream-materialize-encodings) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FoldGlobalsPass (iree-util-fold-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FuseGlobalsPass (iree-util-fuse-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before IPOPass (iree-util-ipo) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before VerifyLoweringToAsyncResourcesPass (iree-stream-verify-lowering-to-async-resources) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before ElideAsyncTransfersPass (iree-stream-elide-async-transfers) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before ElideAsyncCopiesPass (iree-stream-elide-async-copies) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before RefineUsagePass (iree-stream-refine-usage) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FoldGlobalsPass (iree-util-fold-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FuseGlobalsPass (iree-util-fuse-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before IPOPass (iree-util-ipo) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before VerifyAsyncAccessRangesPass (iree-stream-verify-async-access-ranges) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before SyncInitializersPass (iree-stream-sync-initializers) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before PropagateTimepointsPass (iree-stream-propagate-timepoints) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before MaterializeBuiltinsPass (iree-stream-materialize-builtins) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FoldGlobalsPass (iree-util-fold-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FuseGlobalsPass (iree-util-fuse-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before IPOPass (iree-util-ipo) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before VerifyLoweringToAsyncPass (iree-stream-verify-lowering-to-async) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before ScheduleAllocationPass (iree-stream-schedule-allocation) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before PropagateSubrangesPass (iree-util-propagate-subranges) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FoldGlobalsPass (iree-util-fold-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FuseGlobalsPass (iree-util-fuse-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before IPOPass (iree-util-ipo) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before AutomaticReferenceCountingPass (iree-stream-automatic-reference-counting) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before VerifyLoweringToCmdPass (iree-stream-verify-lowering-to-cmd) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FoldGlobalsPass (iree-util-fold-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FuseGlobalsPass (iree-util-fuse-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before IPOPass (iree-util-ipo) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FixedPointIteratorPass (iree-util-fixed-point-iterator) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FoldGlobalsPass (iree-util-fold-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {iree.fixedpoint.iteration = 0 : index, stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FuseGlobalsPass (iree-util-fuse-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {iree.fixedpoint.iteration = 0 : index, stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before IPOPass (iree-util-ipo) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {iree.fixedpoint.iteration = 0 : index, stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before ElideTimepointsPass (iree-stream-elide-timepoints) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {iree.fixedpoint.iteration = 0 : index, stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FuseDispatchBindingsPass (iree-stream-fuse-dispatch-bindings) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before AnnotateDispatchArgumentsPass (iree-stream-annotate-dispatch-arguments) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before AnnotateDispatchAssumptionsPass (iree-stream-annotate-dispatch-assumptions) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before PackDispatchOperandsPass (iree-stream-pack-dispatch-operands) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FoldGlobalsPass (iree-util-fold-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FuseGlobalsPass (iree-util-fuse-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before IPOPass (iree-util-ipo) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FoldUniformOperandsPass (iree-stream-fold-uniform-operands) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FoldGlobalsPass (iree-util-fold-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FuseGlobalsPass (iree-util-fuse-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before IPOPass (iree-util-ipo) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before SymbolDCE (symbol-dce) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before AssignLegacyTargetDevicesPass (iree-hal-assign-legacy-target-devices) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before AssignTargetDevicesPass (iree-hal-assign-target-devices) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before MaterializeTargetDevicesPass (iree-hal-materialize-target-devices) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before ResolveDevicePromisesPass (iree-hal-resolve-device-promises) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before ResolveDeviceAliasesPass (iree-hal-resolve-device-aliases) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before VerifyDevicesPass (iree-hal-verify-devices) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FoldGlobalsPass (iree-util-fold-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FuseGlobalsPass (iree-util-fuse-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before VerifyDevicesPass (iree-hal-verify-devices) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before MaterializeInterfacesPass (iree-hal-materialize-interfaces) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before PruneExecutablesPass (iree-hal-prune-executables) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before ConvertToHALPass (iree-hal-conversion) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module attributes {stream.affinity.default = #hal.device.affinity<@__device_0>} {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump After ConvertToHALPass (iree-hal-conversion) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before OutlineMemoizeRegionsPass (iree-hal-outline-memoize-regions) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump Before FoldGlobalsPass (iree-util-fold-globals) //----- //
+#executable_target_embedded_elf_x86_64 = #hal.executable.target<"llvm-cpu", "embedded-elf-x86_64", {cpu = "", cpu_features = "", data_layout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128", iree.encoding.resolver = #iree_cpu.cpu_encoding_resolver<>, max_stack_allocation_size = 32768 : i64, native_vector_size = 16 : i64, target_triple = "x86_64-unknown-unknown-eabi-elf"}>
+#device_target_local = #hal.device.target<"local", [#executable_target_embedded_elf_x86_64]> : !hal.device
+module {
+  util.global private @__device_0 = #device_target_local
+}
+
+
+// -----// IR Dump After FoldGlobalsPass (iree-util-fold-globals) //----- //
+module {
+}
+
+
+// -----// IR Dump Before FuseGlobalsPass (iree-util-fuse-globals) //----- //
+module {
+}
+
+
+// -----// IR Dump Before PruneExecutablesPass (iree-hal-prune-executables) //----- //
+module {
+}
+
+
+// -----// IR Dump Before LinkAllExecutablesPass (iree-hal-link-all-executables) //----- //
+module {
+}
+
+
+// -----// IR Dump Before SymbolDCE (symbol-dce) //----- //
+module {
+}
+
+
+// -----// IR Dump Before ResolveExportOrdinalsPass (iree-hal-resolve-export-ordinals) //----- //
+module {
+}
+
+
+// -----// IR Dump Before MaterializeResourceCachesPass (iree-hal-materialize-resource-caches) //----- //
+module {
+}
+
+
+// -----// IR Dump Before MemoizeDeviceSelectionPass (iree-hal-memoize-device-selection) //----- //
+module {
+}
+
+
+// -----// IR Dump Before MemoizeDeviceQueriesPass (iree-hal-memoize-device-queries) //----- //
+module {
+}
+
+
+// -----// IR Dump Before FoldGlobalsPass (iree-util-fold-globals) //----- //
+module {
+}
+
+
+// -----// IR Dump Before FuseGlobalsPass (iree-util-fuse-globals) //----- //
+module {
+}
+
+
+// -----// IR Dump Before InitializeDevicesPass (iree-hal-initialize-devices) //----- //
+module {
+}
+
+
+// -----// IR Dump Before AffineExpandIndexOps (affine-expand-index-ops) //----- //
+module {
+}
+
+
+// -----// IR Dump Before LowerAffinePass (lower-affine) //----- //
+module {
+}
+
+
+// -----// IR Dump Before PruneExecutablesPass (iree-hal-prune-executables) //----- //
+module {
+}
+
+
+// -----// IR Dump Before SymbolDCE (symbol-dce) //----- //
+module {
+}
+
+
+// -----// IR Dump Before FixedPointIteratorPass (iree-util-fixed-point-iterator) //----- //
+module {
+}
+
+
+// -----// IR Dump Before FoldGlobalsPass (iree-util-fold-globals) //----- //
+module attributes {iree.fixedpoint.iteration = 0 : index} {
+}
+
+
+// -----// IR Dump Before FuseGlobalsPass (iree-util-fuse-globals) //----- //
+module attributes {iree.fixedpoint.iteration = 0 : index} {
+}
+
+
+// -----// IR Dump Before IPOPass (iree-util-ipo) //----- //
+module attributes {iree.fixedpoint.iteration = 0 : index} {
+}
+
+
+// -----// IR Dump Before Inliner (inline) //----- //
+module {
+}
+
+
+// -----// IR Dump Before SymbolDCE (symbol-dce) //----- //
+module {
+}
+
+
+// -----// IR Dump Before CombineInitializersPass (iree-util-combine-initializers) //----- //
+module {
+}
+
+
+// -----// IR Dump Before PropagateSubrangesPass (iree-util-propagate-subranges) //----- //
+module {
+}
+
+
+// -----// IR Dump Before SymbolDCE (symbol-dce) //----- //
+module {
+}
+
+
+// -----// IR Dump Before FoldGlobalsPass (iree-util-fold-globals) //----- //
+module {
+}
+
+
+// -----// IR Dump Before FuseGlobalsPass (iree-util-fuse-globals) //----- //
+module {
+}
+
+
+// -----// IR Dump Before ConversionPass (iree-vm-conversion) //----- //
+module {
+}
+
+
+// -----// IR Dump Before SymbolDCE (symbol-dce) //----- //
+module {
+}
+
+
+// -----// IR Dump Before FoldGlobalsPass (iree-util-fold-globals) //----- //
+module {
+}
+
+
+// -----// IR Dump Before FuseGlobalsPass (iree-util-fuse-globals) //----- //
+module {
+}
+
+
+// -----// IR Dump Before Inliner (inline) //----- //
+module {
+}
+
+
+// -----// IR Dump Before SymbolDCE (symbol-dce) //----- //
+module {
+}
+
+
+// -----// IR Dump Before SymbolDCE (symbol-dce) //----- //
+module {
+}
+
+
+// -----// IR Dump Before FoldGlobalsPass (iree-util-fold-globals) //----- //
+module {
+}
+
+
+// -----// IR Dump Before FuseGlobalsPass (iree-util-fuse-globals) //----- //
+module {
+}
+
+
+// -----// IR Dump Before Canonicalizer (canonicalize) //----- //
+module {
+}
+
+
+// -----// IR Dump Before CSE (cse) //----- //
+module {
+}
+
+
+// -----// IR Dump Before Canonicalizer (canonicalize) //----- //
+module {
+}
+
+
+// -----// IR Dump Before DropCompilerHintsPass (iree-util-drop-compiler-hints) //----- //
+module {
+}
+
+
+add.mlir:0:0: error: outer module does not contain a vm.module op
+add.mlir:0:0: note: see current operation: 
+"builtin.module"() ({
+^bb0:
+}) : () -> ()
+error opening input file: failed to generate bytecode
