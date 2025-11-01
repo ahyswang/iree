@@ -1,0 +1,25 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb-dap",
+            "request": "launch",
+            "name": "Debug",
+            "program": "${workspaceFolder}/../iree-build/tools/iree-compile",
+            "args": ["mobilenetv2.mlir",
+                "--iree-hal-target-device=local",   
+                "--iree-hal-local-target-device-backends=llvm-cpu",   
+                "--iree-llvmcpu-target-cpu=generic",     
+                "--iree-llvmcpu-link-embedded=false",   
+                "--dump-compilation-phases-to=/tmp/iree/mobilenetv2",   
+                "-o", "/tmp/iree/simple_abs/mobilenetv2.vmfb"],
+            "env": [
+                "PATH=/workspace/yswang26/opt/llvm/bin:${env:PATH}"
+            ],
+            "cwd": "${workspaceFolder}/demo/onnx",
+        }
+    ]
+}
