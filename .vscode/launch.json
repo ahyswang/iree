@@ -20,6 +20,24 @@
                 "PATH=/workspace/yswang26/opt/llvm/bin:${env:PATH}"
             ],
             "cwd": "${workspaceFolder}/demo/onnx",
+        },
+        {
+            "type": "lldb-dap",
+            "request": "launch",
+            "name": "add_lowering",
+            "program": "${workspaceFolder}/../iree-build/tools/iree-compile",
+            "args": ["add.mlir",
+                "--iree-hal-target-device=local",   
+                "--iree-hal-local-target-device-backends=llvm-cpu",   
+                "--iree-llvmcpu-target-cpu=generic",     
+                "--iree-llvmcpu-link-embedded=false",   
+                "--dump-compilation-phases-to=/tmp/iree/add_lowering",   
+                "-o", "-",
+                "--mlir-print-ir-after-all", "--mlir-print-ir-before-all"],
+            "env": [
+                "PATH=/workspace/yswang26/opt/llvm/bin:${env:PATH}"
+            ],
+            "cwd": "${workspaceFolder}/demo/add_lowering",
         }
     ]
 }

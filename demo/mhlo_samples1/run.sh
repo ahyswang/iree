@@ -1,0 +1,1 @@
+iree-opt --one-shot-bufferize add-linalg-tensor.mlir -o add-linalg-buffer.mlir
