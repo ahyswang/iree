@@ -12,6 +12,7 @@ $IREE_COMPILE --iree-hal-target-backends=llvm-cpu --iree-hal-target-device=x86 a
 --mlir-print-ir-after-change \
 --mlir-print-ir-before-all -o log.vmbf &> log.txt
 
+rm -rf  /tmp/iree/add_lowering/
 mkdir -p /tmp/iree/add_lowering/
 
 iree-compile add.mlir \

@@ -21,7 +21,8 @@ set(CMAKE_SYSTEM_PROCESSOR riscv)
 set(RISCV_HOST_TAG linux)
 
 set(RISCV_TOOL_PATH "$ENV{HOME}/riscv" CACHE PATH "RISC-V tool path")
-
+#set(RISCV_TOOL_PATH "/workspace/yswang26/opt/riscv/" CACHE PATH "RISC-V tool path")
+ 
 set(RISCV_TOOLCHAIN_ROOT "${RISCV_TOOL_PATH}/toolchain/clang/${RISCV_HOST_TAG}/RISCV" CACHE PATH "RISC-V compiler path")
 set(RISCV_TOOLCHAIN_PREFIX "riscv64-unknown-linux-gnu-" CACHE STRING "RISC-V toolchain prefix")
 set(CMAKE_FIND_ROOT_PATH ${RISCV_TOOLCHAIN_ROOT})
