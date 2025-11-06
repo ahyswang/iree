@@ -24,9 +24,9 @@
         {
             "type": "lldb-dap",
             "request": "launch",
-            "name": "add_lowering",
+            "name": "add_lowering_compiler",
             "program": "${workspaceFolder}/../iree-build/tools/iree-compile",
-            "args": ["add.mlir",
+            "args": ["add_onnx.mlir",
                 "--iree-hal-target-device=local",   
                 "--iree-hal-local-target-device-backends=llvm-cpu",   
                 "--iree-llvmcpu-target-cpu=generic",     
@@ -38,6 +38,47 @@
                 "PATH=/workspace/yswang26/opt/llvm/bin:${env:PATH}"
             ],
             "cwd": "${workspaceFolder}/demo/add_lowering",
+        },
+        {
+            "type": "lldb-dap",
+            "request": "launch",
+            "name": "add_lowering_run",
+            "program": "${workspaceFolder}/../iree-build/tools/iree-run-module",
+            "args": ["add.mlir",
+                "--module=./data.ignore/add_lowering/add_lowering.vmfb",
+                "--device=local-task",
+                "--function=main",
+                "--input=10xi32=[1,2,3,4,5,6,7,8,9,10]",
+                "--input=10xi32=[1,2,3,4,5,6,7,8,9,10]",
+                "--expected_output=10xi32=[2,4,6,8,10,12,14,16,18,20]"   
+            ],
+            "env": [
+                "PATH=/workspace/yswang26/opt/llvm/bin:${env:PATH}"
+            ],
+            "cwd": "${workspaceFolder}/demo/add_lowering",
+        },
+        {
+            "type": "lldb-dap",
+            "request": "launch",
+            "name": "print_plugin_info",
+            "program": "${workspaceFolder}/../iree-build/tools/iree-compile",
+            "args": ["--iree-print-plugin-info", "--iree-plugin=example", "add.mlir"],
+            "env": [
+                "PATH=/workspace/yswang26/opt/llvm/bin:${env:PATH}"
+            ],
+            "cwd": "${workspaceFolder}/demo/add_lowering",
+        },
+        {
+            //iree-opt --iree-plugin=simple_io_sample --iree-print-plugin-info --pass-pipeline='builtin.module(iree-simpleio-legalize)'
+            "type": "lldb-dap",
+            "request": "launch",
+            "name": "simple_io_sample",
+            "program": "${workspaceFolder}/../iree-build/tools/iree-compile",
+            "args": ["--iree-plugin=simple_io_sample", "--iree-print-plugin-info", "--pass-pipeline=builtin.module(iree-simpleio-legalize)", "print.mlir"],
+            "env": [
+                "PATH=/workspace/yswang26/opt/llvm/bin:${env:PATH}"
+            ],
+            "cwd": "${workspaceFolder}/samples/compiler_plugins/simple_io_sample/test",
         }
     ]
 }

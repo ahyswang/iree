@@ -1,17 +1,9 @@
-IREE_COMPILE=`pwd`/../../../iree-build/tools/iree-opt
-IREE_COMPILE=`pwd`/../../../iree-build/tools/iree-compile
-IREE_RUN_MODULE=`pwd`/../../../iree-build/tools/iree-run-module
-IREE_BENCHMARK_MODULE=`pwd`/../../../iree-build/tools/iree-benchmark-module
-IREE_DIR=`pwd`/../../../iree/
+export PATH=`pwd`/../../../iree-build/tools/:$PATH
 
 save_dir=./data.ignore/add_lowering/
 mkdir -p $save_dir
 
-# input_mlir=add.mlir
-# input_mlir=add_tosa.mlir
-input_mlir=add_onnx.mlir
-# input_mlir=add_onnx.mlir
-# input_mlir=add_linalg.mlir
+input_mlir=myadd_onnx.mlir
 
 iree-compile $input_mlir \
 --iree-hal-target-device=local \

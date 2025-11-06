@@ -1,3 +1,4 @@
 *.vmxv
 *.vmfb
 log.*
+*.ignore

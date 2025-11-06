@@ -2,7 +2,7 @@ mkdir -p ./data.ignore/add_dynamic/
 
 # 1. full test.
 
-input_mlir=add.mlir
+input_mlir=add_onnx.mlir
 
 iree-compile $input_mlir \
   --iree-hal-target-device=local \
