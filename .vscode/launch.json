@@ -8,7 +8,7 @@
             "type": "lldb-dap",
             "request": "launch",
             "name": "Debug",
-            "program": "${workspaceFolder}/../iree-build/tools/iree-compile",
+            "program": "${workspaceFolder}/build/tools/iree-compile",
             "args": ["mobilenetv2.mlir",
                 "--iree-hal-target-device=local",   
                 "--iree-hal-local-target-device-backends=llvm-cpu",   
@@ -25,8 +25,8 @@
             "type": "lldb-dap",
             "request": "launch",
             "name": "add_lowering_compiler",
-            "program": "${workspaceFolder}/../iree-build/tools/iree-compile",
-            "args": ["add_onnx.mlir",
+            "program": "${workspaceFolder}/build/tools/iree-compile",
+            "args": ["myadd_onnx.mlir",
                 "--iree-hal-target-device=local",   
                 "--iree-hal-local-target-device-backends=llvm-cpu",   
                 "--iree-llvmcpu-target-cpu=generic",     
@@ -37,13 +37,13 @@
             "env": [
                 "PATH=/workspace/yswang26/opt/llvm/bin:${env:PATH}"
             ],
-            "cwd": "${workspaceFolder}/demo/add_lowering",
+            "cwd": "${workspaceFolder}/demo/myadd_lowering",
         },
         {
             "type": "lldb-dap",
             "request": "launch",
             "name": "add_lowering_run",
-            "program": "${workspaceFolder}/../iree-build/tools/iree-run-module",
+            "program": "${workspaceFolder}/build/tools/iree-run-module",
             "args": ["add.mlir",
                 "--module=./data.ignore/add_lowering/add_lowering.vmfb",
                 "--device=local-task",
@@ -58,22 +58,11 @@
             "cwd": "${workspaceFolder}/demo/add_lowering",
         },
         {
-            "type": "lldb-dap",
-            "request": "launch",
-            "name": "print_plugin_info",
-            "program": "${workspaceFolder}/../iree-build/tools/iree-compile",
-            "args": ["--iree-print-plugin-info", "--iree-plugin=example", "add.mlir"],
-            "env": [
-                "PATH=/workspace/yswang26/opt/llvm/bin:${env:PATH}"
-            ],
-            "cwd": "${workspaceFolder}/demo/add_lowering",
-        },
-        {
             //iree-opt --iree-plugin=simple_io_sample --iree-print-plugin-info --pass-pipeline='builtin.module(iree-simpleio-legalize)'
             "type": "lldb-dap",
             "request": "launch",
             "name": "simple_io_sample",
-            "program": "${workspaceFolder}/../iree-build/tools/iree-compile",
+            "program": "${workspaceFolder}/build/tools/iree-compile",
             "args": ["--iree-plugin=simple_io_sample", "--iree-print-plugin-info", "--pass-pipeline=builtin.module(iree-simpleio-legalize)", "print.mlir"],
             "env": [
                 "PATH=/workspace/yswang26/opt/llvm/bin:${env:PATH}"

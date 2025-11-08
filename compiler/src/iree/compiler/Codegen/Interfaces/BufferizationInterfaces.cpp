@@ -731,6 +731,8 @@ void registerBufferizationInterfaces(DialectRegistry &registry) {
         LinalgExtOpInterface<IREE::LinalgExt::AttentionOp>>(*ctx);
     IREE::LinalgExt::MapScatterOp::attachInterface<
         LinalgExtOpInterface<IREE::LinalgExt::MapScatterOp>>(*ctx);
+    IREE::LinalgExt::MyAddOp::attachInterface<
+        LinalgExtOpInterface<IREE::LinalgExt::MyAddOp>>(*ctx);
   });
   registry.insert<linalg::LinalgDialect>();
   registry.addExtension(+[](MLIRContext *ctx, linalg::LinalgDialect *dialect) {

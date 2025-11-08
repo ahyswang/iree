@@ -1975,4 +1975,50 @@ def IREELinalgExt_CustomOp : IREELinalgExt_Op<"custom_op", [
   }];
 }
 
+
+def IREELinalgExt_MyAddOp : IREELinalgExt_Op<"myadd",[
+  DeclareOpInterfaceMethods<ReifyRankedShapedTypeOpInterface>,
+  DeclareOpInterfaceMethods<LinalgExtInterface>,
+  DeclareOpInterfaceMethods<TilingInterface,
+      ["generateScalarImplementation",
+       "getIterationDomain",
+       "getLoopIteratorTypes",
+       "getResultTilePosition",
+       "getTiledImplementation"]>
+]>{
+  let summary = [{MyAdd operator.}];
+  let description = [{
+  }];
+
+  let arguments = (ins Variadic<AnyShaped>:$inputs,
+                       Variadic<AnyShaped>:$outputs
+  );
+
+  let results = (outs Variadic<AnyRankedTensor>:$results);
+  let assemblyFormat = [{
+    attr-dict
+    `ins` `(` $inputs `:` type($inputs) `)`
+    `outs` `(` $outputs `:` type($outputs) `)`
+    (`->` type($results)^)?
+  }];
+
+  let extraClassDeclaration = extraLinalgExtOpClassDeclaration # [{
+    Value getLhs() {
+      return getDpsInputOperand(0)->get();
+    }
+    Value getRhs() {
+      return getDpsInputOperand(1)->get();
+    }
+    Value getOutput() {
+      //Value output = getOperand(2);
+      return getDpsInitOperand(0)->get();
+    }
+    // Method to implement for specifying output range for
+    // DestinationStyleOpInterface
+    MutableOperandRange getDpsInitsMutable() {
+      return getOutputsMutable();
+    }
+  }];
+}
+
 #endif  // IREE_DIALECT_LINALGEXT_OPS

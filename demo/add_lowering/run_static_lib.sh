@@ -1,4 +1,5 @@
 #!/bin/bash
+export PATH=`pwd`/../../build/tools/:$PATH
 
 save_dir=./data.ignore/add_lowering_static_lib/
 mkdir -p $save_dir

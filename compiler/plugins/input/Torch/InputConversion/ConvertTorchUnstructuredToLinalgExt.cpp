@@ -21,6 +21,71 @@ namespace mlir::iree_compiler::TorchInput {
 
 namespace {
 
+mlir::RankedTensorType convertToSignless(torch::Torch::ValueTensorType valueTensorType) {
+
+  mlir::RankedTensorType tensorType = llvm::dyn_cast<RankedTensorType>(valueTensorType.toBuiltinTensor());
+  if (!tensorType) {
+    return tensorType;
+  }
+  
+  mlir::Type elementType = tensorType.getElementType();
+  if (!elementType.isInteger()) {
+    return tensorType;
+  }
+
+  auto intType = llvm::dyn_cast<mlir::IntegerType>(elementType);
+  mlir::Type signlessType = mlir::IntegerType::get(
+      intType.getContext(), intType.getWidth(), mlir::IntegerType::Signless);
+
+  return mlir::RankedTensorType::get(
+      tensorType.getShape(), signlessType, tensorType.getEncoding());
+}
+
+struct MyAddOpConversion 
+  : public OpRewritePattern<torch::Torch::AtenMyAddTensorOp> {
+  using OpRewritePattern::OpRewritePattern;
+  LogicalResult matchAndRewrite(torch::Torch::AtenMyAddTensorOp op,
+                                PatternRewriter &rewriter) const override {
+    Location loc = op.getLoc();
+
+    Value lhsTorchValue = op.getSelf();
+    Value rhsTorchValue = op.getOther();
+    Value resultTorchValue = op.getResult();
+
+    ImplicitLocOpBuilder b(loc, rewriter);
+
+    auto resultTensorType = convertToSignless(cast<torch::Torch::ValueTensorType>(resultTorchValue.getType()));
+
+    // Cast to the builtin tensor type.
+    Value lhsValue = rewriter.create<torch::TorchConversion::ToBuiltinTensorOp>(
+        loc, convertToSignless(cast<torch::Torch::ValueTensorType>(lhsTorchValue.getType())), lhsTorchValue);
+    Value rhsValue = rewriter.create<torch::TorchConversion::ToBuiltinTensorOp>(
+      loc, convertToSignless(cast<torch::Torch::ValueTensorType>(rhsTorchValue.getType())), rhsTorchValue);
+    
+  
+    llvm::SmallVector<int64_t> outShape;
+    llvm::SmallVector<Value> dynDims;
+    for (auto dim = 0; dim < resultTensorType.getRank(); ++dim) {
+      outShape.push_back(resultTensorType.getDimSize(dim));
+      if (ShapedType::isDynamic(resultTensorType.getDimSize(dim))) {
+        dynDims.push_back(rewriter.create<tensor::DimOp>(loc, lhsValue, dim));
+      }
+    }
+    auto outTy = RankedTensorType::get(outShape, resultTensorType.getElementType());
+    Value empty = rewriter.create<tensor::EmptyOp>(loc, outTy, dynDims);
+
+    auto myAddOp = rewriter.create<IREE::LinalgExt::MyAddOp>(
+        loc, resultTensorType, ValueRange{lhsValue, rhsValue}, ValueRange{empty});
+ 
+    // Cast back
+    Value torchResult = rewriter.create<torch::TorchConversion::FromBuiltinTensorOp>(loc, resultTorchValue.getType(), myAddOp.getResult(0));
+   
+    rewriter.replaceOp(op, torchResult);
+    return success();
+
+  }
+};
+
 struct FftRfftOpConversion
     : public OpRewritePattern<torch::Torch::AtenFftRfftOp> {
   using OpRewritePattern::OpRewritePattern;
@@ -181,6 +246,7 @@ public:
     RewritePatternSet patterns(context);
 
     patterns.add<FftRfftOpConversion>(context);
+    patterns.add<MyAddOpConversion>(context);
 
     if (failed(applyPatternsGreedily(getOperation(), std::move(patterns)))) {
       signalPassFailure();

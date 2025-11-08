@@ -1088,6 +1088,130 @@ LogicalResult ScanOp::getResultTilePosition(
 }
 
 //===----------------------------------------------------------------------===//
+// MyAddOp
+//===----------------------------------------------------------------------===//
+
+SmallVector<utils::IteratorType> MyAddOp::getLoopIteratorTypes() {
+  auto rankedType = cast<ShapedType>(getLhs().getType());
+  return SmallVector<utils::IteratorType>(rankedType.getRank(), utils::IteratorType::parallel);
+}
+
+SmallVector<Range> MyAddOp::getIterationDomain(OpBuilder &builder) {
+
+#if 1
+  OpFoldResult zero = builder.getIndexAttr(0);
+  OpFoldResult one = builder.getIndexAttr(1);
+
+  ReifiedRankedShapedTypeDims reifiedDims;
+  LogicalResult result = reifyResultShapes(builder, reifiedDims);
+  (void)result;
+  assert(succeeded(result));
+
+  SmallVector<Range> ranges;
+  for (auto dim : llvm::seq<int64_t>(0, reifiedDims[0].size())) {
+    ranges.push_back(Range{zero, reifiedDims[0][dim], one});
+  }
+
+  return ranges;
+
+#else 
+  Value lhsValue = getLhs();
+  auto lhsType = cast<ShapedType>(lhsValue.getType());
+  int64_t operandRank = lhsType.getRank();
+  SmallVector<Range> loopBounds(operandRank);
+  Location loc = getLoc();
+  OpFoldResult zero = builder.getIndexAttr(0);
+  OpFoldResult one = builder.getIndexAttr(1);
+  
+  for (auto dim : llvm::seq<int64_t>(0, operandRank)) {
+    loopBounds[dim].offset = zero;
+    loopBounds[dim].size = getDim(builder, loc, lhsValue, dim);
+    loopBounds[dim].stride = one;
+  }
+  return loopBounds;
+#endif
+}
+
+FailureOr<TilingResult> MyAddOp::getTiledImplementation(OpBuilder &builder, ArrayRef<OpFoldResult> offsets,
+        ArrayRef<OpFoldResult> sizes) {
+  Location loc = getLoc();
+  auto resultType = llvm::dyn_cast<RankedTensorType>(getType(0));
+
+  SmallVector<OpFoldResult> strides(resultType.getRank(),
+                                    builder.getI64IntegerAttr(1));
+
+  // Extract slices for each input
+  SmallVector<Operation *> sliceOps;
+  SmallVector<Value> sliceValues;
+  for (Value operand : getOperands()) {
+    auto sliceOp = builder.create<tensor::ExtractSliceOp>(
+        loc, operand, offsets, sizes, strides);
+    sliceOps.push_back(sliceOp);
+    sliceValues.push_back(sliceOp.getResult());
+  }
+
+  SmallVector<Type> resultTensorTypes =
+      llvm::map_to_vector(getDpsInitsMutable(), [&](OpOperand &opOperand) {
+        return sliceValues[opOperand.getOperandNumber()].getType();
+      });
+
+  // Clone add op for this tile
+  Operation *tiledAddOp = mlir::clone(builder, getOperation(),
+                                      resultTensorTypes,
+                                      ValueRange(sliceValues));
+
+  // Insert the tile result back
+  // Value dest = getDpsInitOperand(0)->get();
+  // auto insertOp = builder.create<tensor::InsertSliceOp>(
+  //     loc, tiledAddOp->getResult(0), dest, offsets, sizes, strides);
+
+  // Compose result
+  TilingResult result;
+  result.tiledOps = {tiledAddOp};
+  result.tiledValues = {tiledAddOp->getResult(0)};
+  result.generatedSlices = sliceOps;
+  //result.generatedSlices.push_back(insertOp);
+
+  return result;
+}
+
+LogicalResult  MyAddOp::generateScalarImplementation(OpBuilder &b, Location loc,
+  ValueRange ivs) {
+
+  Value lhs = getLhs();
+  Value rhs = getRhs();
+  Value out = getOutput();
+
+  SmallVector<Value> indices(ivs.begin(), ivs.end());
+  Value lhsVal = b.create<memref::LoadOp>(loc, lhs, indices);
+  Value rhsVal = b.create<memref::LoadOp>(loc, rhs, indices);
+  Value sum ;
+  Type eltType = lhsVal.getType();  
+
+  if (eltType.isFloat()) {
+    sum = b.create<arith::AddFOp>(loc, lhsVal, rhsVal);
+  } else if (eltType.isInteger()) {
+    sum = b.create<arith::AddIOp>(loc, lhsVal, rhsVal);
+  } else {
+    return failure();
+  }
+  
+  b.create<memref::StoreOp>(loc, sum, out, indices);
+
+  return success();
+}
+
+LogicalResult MyAddOp::getResultTilePosition(OpBuilder &builder,
+                      unsigned resultNumber, ArrayRef<OpFoldResult> offsets,
+                      ArrayRef<OpFoldResult> sizes,
+                      SmallVector<OpFoldResult> &resultOffsets,
+                      SmallVector<OpFoldResult> &resultSizes) {
+  resultOffsets.assign(offsets.begin(), offsets.end());
+  resultSizes.assign(sizes.begin(), sizes.end());
+  return success();
+}
+
+//===----------------------------------------------------------------------===//
 // TopkOp
 //===----------------------------------------------------------------------===//
 

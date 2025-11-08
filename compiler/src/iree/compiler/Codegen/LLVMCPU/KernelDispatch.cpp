@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 #include "iree/compiler/Codegen/LLVMCPU/KernelDispatch.h"
+#include <llvm-18/llvm/Support/Casting.h>
 
 #include "iree/compiler/Codegen/Common/TileSizeSelection.h"
 #include "iree/compiler/Codegen/Dialect/CPU/IR/IREECPUTypes.h"
@@ -2055,6 +2056,29 @@ static LogicalResult setRootConfig(mlir::FunctionOpInterface entryPointFn,
       DispatchLoweringPassPipeline::CPULinalgExtTileAndVectorize);
 }
 
+/// Sets the lowering configuration for dispatch region for linalg_ext.fft
+/// root op.
+static LogicalResult setRootConfigForMyAddOp(mlir::FunctionOpInterface entryPointFn,
+                                   IREE::LinalgExt::MyAddOp myaddOp) {
+  assert(!getLoweringConfig(myaddOp) && "expected lowering_config is not set");
+  SmallVector<int64_t> distTileSizes =
+      getDefaultDistributedLevelTileSizes(myaddOp, DistributionHeuristicConfig{});
+
+  auto resultType = llvm::dyn_cast<RankedTensorType>(myaddOp.getType(0));
+  auto rank = resultType.getRank();
+  // Append vector level tiling sizes using zero values, which means no tiling
+  // in the pipeline.
+  LoweringConfigGenerator generator(myaddOp);
+  generator.setDistributionTileSizes(distTileSizes);
+  SmallVector<int64_t> zeros(rank, 0);
+  generator.setVectorTileSizes(zeros);
+  IREE::CPU::LoweringConfigAttr loweringConfig =
+      generator.generateCPULoweringConfig();
+  return setOpConfigAndEntryPointFnTranslation(
+      entryPointFn, myaddOp, loweringConfig,
+      DispatchLoweringPassPipeline::CPULinalgExtTileAndVectorize);
+}
+
 /// Sets the lowering configuration for dispatch region for winograd ops:
 ///   linalg_ext.winograd.filter_transform
 ///   linalg_ext.winograd.input_transform
@@ -2693,6 +2717,9 @@ setRootConfigImpl(mlir::FunctionOpInterface entryPointFn, Operation *op,
                   const TargetMLTransformInfo &targetMLTransInfo) {
   auto setRootConfigFn = [&](Operation *op) -> LogicalResult {
     return TypeSwitch<Operation *, LogicalResult>(op)
+        // .Case<IREE::LinalgExt::MyAddOp>([&](auto op) {
+        //   return setRootConfigForMyAddOp(entryPointFn, llvm::dyn_cast<IREE::LinalgExt::MyAddOp>(op));
+        // }) 
         .Case<linalg::GenericOp>([&](auto op) {
           return setRootConfig(entryPointFn, op, LinalgOpInfo(op),
                                targetMLTransInfo);

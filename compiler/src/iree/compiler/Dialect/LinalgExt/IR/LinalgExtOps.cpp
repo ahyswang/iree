@@ -2608,6 +2608,22 @@ LogicalResult IREE::LinalgExt::IndexOp::verify() {
   return success();
 }
 
+//===----------------------------------------------------------------------===//
+// MyAddOp
+//===----------------------------------------------------------------------===//
+
+LogicalResult MyAddOp::verify() {
+  
+  return success();
+}
+
+LogicalResult
+MyAddOp::reifyResultShapes(OpBuilder &b,
+                          ReifiedRankedShapedTypeDims &reifiedReturnShapes) {
+  return cast<LinalgExtOp>(getOperation())
+      .reifyResultShapes(b, reifiedReturnShapes);
+}
+
 //===---------------------------------------------------------------------===//
 // End operation definitions
 //===---------------------------------------------------------------------===//
@@ -2636,6 +2652,7 @@ DEFINE_OP_GET_EFFECTS(AttentionOp)
 DEFINE_OP_GET_EFFECTS(OnlineAttentionOp)
 DEFINE_OP_GET_EFFECTS(Im2colOp)
 DEFINE_OP_GET_EFFECTS(CustomOp)
+DEFINE_OP_GET_EFFECTS(MyAddOp)
 
 } // namespace mlir::iree_compiler::IREE::LinalgExt
 

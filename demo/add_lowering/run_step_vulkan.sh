@@ -1,8 +1,4 @@
-IREE_COMPILE=`pwd`/../../../iree-build/tools/iree-opt
-IREE_COMPILE=`pwd`/../../../iree-build/tools/iree-compile
-IREE_RUN_MODULE=`pwd`/../../../iree-build/tools/iree-run-module
-IREE_BENCHMARK_MODULE=`pwd`/../../../iree-build/tools/iree-benchmark-module
-IREE_DIR=`pwd`/../../../iree/
+export PATH=`pwd`/../../build/tools/:$PATH
 
 save_dir=./data.ignore/add_lowering_vulkan/
 mkdir -p $save_dir

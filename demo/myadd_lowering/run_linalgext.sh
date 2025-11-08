@@ -1,13 +1,9 @@
 export PATH=`pwd`/../../build/tools/:$PATH
 
-save_dir=./data.ignore/add_lowering/
+save_dir=./data.ignore/add_linalgext/
 mkdir -p $save_dir
 
-# input_mlir=add.mlir
-# input_mlir=add_tosa.mlir
-input_mlir=add_onnx.mlir
-# input_mlir=add_onnx.mlir
-# input_mlir=add_linalg.mlir
+input_mlir=add_linalgext.mlir
 
 iree-compile $input_mlir \
 --iree-hal-target-device=local \

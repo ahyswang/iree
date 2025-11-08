@@ -1,6 +1,7 @@
-export PATH=`pwd`/../../../iree-build/tools/:$PATH
+export PATH=`pwd`/../../build/tools/:$PATH
 
 save_dir=./data.ignore/add_lowering/
+rm -rf $save_dir
 mkdir -p $save_dir
 
 input_mlir=myadd_onnx.mlir
