@@ -1,6 +1,9 @@
+export PATH=`pwd`/../../build/tools/:$PATH
+
 rm -rf ./data.ignore/add_dynamic/
 mkdir -p ./data.ignore/add_dynamic/
 
+#iree-opt --convert-torch-onnx-to-torch  --torch-to-iree  ./add_onnx_qdq_pertensor.mlir 
 # 1. full test.
 
 input_mlir=add_onnx_qdq_pertensor.mlir
