@@ -17,3 +17,6 @@ iree-compile iree_input_opt.mlir \
 --iree-llvmcpu-target-cpu=generic   \
 --iree-llvmcpu-link-embedded=false \
 -o iree_input_opt.vmfb
+
+# tf.ops
+# /workspace/yswang26/iree/.venv/lib/python3.12/site-packages/tensorflow/include/tensorflow/compiler/mlir/tensorflow/ir/tf_all_ops.h.inc

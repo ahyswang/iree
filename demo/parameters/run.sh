@@ -27,10 +27,15 @@ iree-dump-parameters --parameters=output.irpa
 iree-dump-parameters --parameters=output.irpa  --extract=embedding=embeddubg.bin
 
 # parameters_scoped.mlir
+mkdir -p ./data.ignore/
 
 iree-compile \
     --iree-hal-target-device=local \
-    --iree-hal-local-target-device-backends=vmvx parameters_scoped.mlir -o parameters_scoped.vmvx
+    --compile-to=vm \
+    --dump-compilation-phases-to=./data.ignore/ \
+    --mlir-print-ir-after-change \
+    --mlir-print-ir-before-all \
+    --iree-hal-local-target-device-backends=vmvx parameters_scoped.mlir -o parameters_scoped.vmvx > ./data.ignore/compile_log.txt 2>&1
 
 # iree-run-module --device=local-sync --module=- --function=echo \
 #     --parameters=a=./parameters_a.safetensors \
