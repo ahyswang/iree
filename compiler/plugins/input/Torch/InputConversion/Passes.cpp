@@ -46,9 +46,11 @@ void createTorchToIREEPipeline(
   }
   pm.addNestedPass<func::FuncOp>(createBitCastTensorPass());
   pm.addNestedPass<func::FuncOp>(
-      torch::Torch::createReduceOpVariantsPass(llvm::StringRef()));
+    mlir::torch::TorchConversion::createConvertCustomQuantOpPass());
   pm.addNestedPass<func::FuncOp>(
-      mlir::torch::TorchConversion::createConvertCustomQuantOpPass());
+      torch::Torch::createReduceOpVariantsPass(llvm::StringRef()));
+//   pm.addNestedPass<func::FuncOp>(
+//       mlir::torch::TorchConversion::createConvertCustomQuantOpPass());
   if (options.decompose)
     pm.addNestedPass<func::FuncOp>(
         torch::Torch::createDecomposeComplexOpsPass(BackendLegalOps::get()));

@@ -333,7 +333,7 @@ def export_transformer_block():
 
     exported = aot.export(model, args=(input_ids, position_ids, attention_mask, cache_k, cache_v))
     #exported.print_readable()
-    exported.save_mlir("qwen3-0.6b.mlir")
+    exported.save_mlir("./data.ignore/qwen3-0.6b.mlir")
 
     batch = torch.export.Dim("batch")
     seq_len = torch.export.Dim("seq_len")
@@ -349,7 +349,106 @@ def export_transformer_block():
                               "cache_v": {2: cache_len},
                         })
     #exported.print_readable()
-    exported.save_mlir("qwen3-0.6b_dyn.mlir")
+    exported.save_mlir("./data.ignore/qwen3-0.6b_dyn.mlir")
     
+def export_transformer_block_small():
+    model = Qwen3Model(
+        vocab_size= 1024, #151936,
+        embd_size= 128, #1024,
+        hidden_size= 128, #1024,
+        head_dim=16, #128,
+        n_heads=16,
+        intermediate_size=384, #3072,
+        n_kv_heads=8,
+        layers=1,
+        max_len=4096,
+    )
+    model.eval()
 
-export_transformer_block()
+
+    model.half()
+
+    # 输入 dummy 数据
+    B = 1
+    S = 256
+    MAX_CACHE = 256
+    KV = 8
+    HD = 16 #128
+
+    input_ids = torch.randint(0, 1024, (B, S), dtype=torch.int64)
+
+    position_ids = torch.arange(S).unsqueeze(0)
+
+    attention_mask = torch.zeros(
+        B, 1, S, S + MAX_CACHE,
+        dtype=torch.float16,            # <<< 必须 FP16
+    )
+
+    cache_k = torch.randn(B, KV, MAX_CACHE, HD, dtype=torch.float16)
+    cache_v = torch.randn(B, KV, MAX_CACHE, HD, dtype=torch.float16)
+
+    # 导出 ONNX
+    torch.onnx.export(
+        model,
+        (input_ids, position_ids, attention_mask, cache_k, cache_v),
+        "./data.ignore/qwen3-0.6b.onnx",
+        input_names=["input_ids", "position_ids", "attention_mask", "cache_k", "cache_v"],
+        output_names=["hidden_state", "updated_k", "updated_v"],
+        opset_version=18,
+    )
+
+    logits, cache_k_new, cache_v_new = model(
+        input_ids,  # [B,S]
+        position_ids, # [B,S]
+        attention_mask, # [B,1,S,S+MAX_CACHE]
+        cache_k, # [B, KV, max_cache, HD]
+        cache_v, # [B, KV, max_cache, HD]
+    )
+
+    print("Logits shape:", logits.shape)
+    print("Cache K shape:", cache_k_new.shape)
+    print("Cache V shape:", cache_v_new.shape)
+
+    exported = aot.export(model, args=(input_ids, position_ids, attention_mask, cache_k, cache_v))
+    #exported.print_readable()
+    exported.save_mlir("./data.ignore/qwen3-0.6b.mlir")
+
+    batch = torch.export.Dim("batch")
+    seq_len = torch.export.Dim("seq_len")
+    cache_len = torch.export.Dim("cache_len")
+    total_len = torch.export.Dim("total_len")
+
+    exported = aot.export(model, args=(input_ids, position_ids, attention_mask, cache_k, cache_v), 
+                          dynamic_shapes={
+                              "input_ids": {1:seq_len},
+                              "position_ids": {1:seq_len},
+                              "attention_mask": {2: seq_len, 3: total_len},
+                              "cache_k": {2: cache_len},
+                              "cache_v": {2: cache_len},
+                        })
+    #exported.print_readable()
+    exported.save_mlir("./data.ignore/qwen3-0.6b_dyn.mlir")
+
+    compiled_binary = exported.compile(save_to=None)
+    config = rt.Config("local-task")
+    # TODO: Segmentation fault
+    vmm = rt.load_vm_module(
+        rt.VmModule.wrap_buffer(config.vm_instance, compiled_binary.map_memory()),
+        config,
+    )
+    logits_iree, cache_k_new_iree, cache_v_new_iree = vmm.main(
+        input_ids,  # [B,S]
+        position_ids, # [B,S]
+        attention_mask, # [B,1,S,S+MAX_CACHE]
+        cache_k, # [B, KV, max_cache, HD]
+        cache_v, # [B, KV, max_cache, HD]
+    )
+    print("Logits IREE shape:", logits_iree.shape)
+    print("Cache K new IREE shape:", cache_k_new_iree.shape)
+    print("Cache V new IREE shape:", cache_v_new_iree.shape)
+    print("Logits diff:", np.abs(logits.detach().numpy() - logits_iree.to_host()).max(), np.abs(logits.detach().numpy() - logits_iree.to_host()).mean())
+    print("Cache K diff:", np.abs(cache_k_new.detach().numpy() - cache_k_new_iree.to_host()).max(), np.abs(cache_k_new.detach().numpy() - cache_k_new_iree.to_host()).mean())
+    print("Cache V diff:", np.abs(cache_v_new.detach().numpy() - cache_v_new_iree.to_host()).max(), np.abs(cache_v_new.detach().numpy() - cache_v_new_iree.to_host()).mean())
+
+
+export_transformer_block_small()
