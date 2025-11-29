@@ -4,7 +4,7 @@ export PATH=`pwd`/../../build/tools/:$PATH
 
 mkdir -p ./data.ignore/
 
-python main.py
+python main_torch.py
 
 iree-import-onnx ./data.ignore/mlp_qdq.onnx --opset-version 17 -o ./data.ignore/mlp_qdq.mlir
 

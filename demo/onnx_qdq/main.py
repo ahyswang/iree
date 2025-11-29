@@ -7,8 +7,6 @@ import logging
 import onnx
 from onnx import helper, numpy_helper
 import numpy as np
-# from onnx import optimizer
-from onnxscript import ir
 
 class MLP(nn.Module):
     """
@@ -20,9 +18,6 @@ class MLP(nn.Module):
         super().__init__()
         # Define model layers
         self.layer0 = nn.Linear(8, 8, bias=True)
-        self.layer1 = nn.Linear(8, 4, bias=True)
-        self.layer2 = nn.Linear(4, 2, bias=True)
-        self.layer3 = nn.Linear(2, 2, bias=True)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
@@ -87,6 +82,29 @@ def kahn_topological_sort(graph):
 
     return sorted_nodes
 
+def remove_unused_nodes(graph):
+    """
+    删除 ONNX 模型中未使用的节点。
+
+    Args:
+        graph (onnx.GraphProto): ONNX 模型的计算图。
+    """
+    # 记录所有被使用的张量名称（包括模型的输入和输出）
+    used_tensors = set(inp.name for inp in graph.input)  # 模型输入
+    used_tensors.update(out.name for out in graph.output)  # 模型输出
+
+    # 遍历所有节点，记录被使用的输出
+    for node in graph.node:
+        used_tensors.update(node.input)  # 节点的输入被使用
+        used_tensors.update(node.output)  # 节点的输出可能被使用
+
+    # 删除未使用的节点
+    unused_nodes = [node for node in graph.node if not any(output in used_tensors for output in node.output)]
+    for node in unused_nodes:
+        graph.node.remove(node)
+
+    print(f"已删除 {len(unused_nodes)} 个未使用的节点。")
+
 def insert_quant_dequant_nodes(onnx_model_path, output_model_path, target_tensors):
     """
     插入量化和反量化节点到指定的张量。
@@ -109,6 +127,7 @@ def insert_quant_dequant_nodes(onnx_model_path, output_model_path, target_tensor
     for node in graph.node:
         for idx, input_name in enumerate(node.input):
             if input_name in target_tensors:
+                quant_type, quant_scale, quant_zp = target_tensors[input_name]
                 # 创建 QuantizeLinear 节点
                 quant_scale_name = f"{input_name}_quant_scale"
                 quant_zero_point_name = f"{input_name}_quant_zero_point"
@@ -135,10 +154,10 @@ def insert_quant_dequant_nodes(onnx_model_path, output_model_path, target_tensor
 
                 # 添加量化参数到图中
                 graph.initializer.append(
-                    numpy_helper.from_array(np.array(scale, dtype=np.float32), quant_scale_name)
+                    numpy_helper.from_array(np.array(quant_scale, dtype=np.float32), quant_scale_name)
                 )
                 graph.initializer.append(
-                    numpy_helper.from_array(np.array(zero_point, dtype=np.uint8), quant_zero_point_name)
+                    numpy_helper.from_array(np.array(quant_zp, dtype=quant_type), quant_zero_point_name)
                 )
 
                 # 添加新节点
@@ -146,51 +165,108 @@ def insert_quant_dequant_nodes(onnx_model_path, output_model_path, target_tensor
 
     # # 将新节点插入到图中
     graph.node.extend(new_nodes)
+    
     # 对图进行拓扑排序
     sorted_nodes = kahn_topological_sort(graph)
     graph.ClearField("node")
     graph.node.extend(sorted_nodes)
+    # 量化参数值初始化
+    quantize_initializer(graph)
+    
     # 验证模型
     onnx.checker.check_model(model)
     # 保存修改后的模型
     onnx.save(model, output_model_path)
     print(f"量化后的模型已保存到: {output_model_path}")
 
-class ModelTest(unittest.TestCase):
-    def test_mlp_export_onnx(self) -> None:
-        
-        model = MLP()
-        example_x = torch.empty(97, 8, dtype=torch.float32)
+def quantize_initializer(graph):
+    """
+    根据 ONNX 模型中的 QuantizeLinear 节点信息，对 initializer 数据进行量化。
 
-        torch.onnx.export(
-            model,
-            (example_x,),
-            "./data.ignore/mlp.onnx",
-            input_names=["x", ],
-            output_names=["output", ],
-            opset_version=13)
+    Args:
+        graph (onnx.GraphProto): ONNX 模型的计算图。
+    """
+    unused_nodes = []
+    # 遍历所有节点，找到 QuantizeLinear 节点
+    for node in graph.node:
+        if node.op_type == "QuantizeLinear":
+            # 获取 QuantizeLinear 的输入
+            input_name = node.input[0]  # 浮点输入
+            scale_name = node.input[1]  # scale
+            zero_point_name = node.input[2]  # zero_point
+            output_name = node.output[0]  # 量化后的输出
 
-    def test_mlp_export_onnx_and_qdq(self) -> None:
-        
-        model = MLP()
-        example_x = torch.empty(97, 8, dtype=torch.float32)
+            # 查找 scale 和 zero_point 的值
+            scale = None
+            zero_point = None
+            for initializer in graph.initializer:
+                if initializer.name == scale_name:
+                    scale = numpy_helper.to_array(initializer)
+                elif initializer.name == zero_point_name:
+                    zero_point = numpy_helper.to_array(initializer)
 
-        torch.onnx.export(
-            model,
-            (example_x,),
-            "./data.ignore/mlp.onnx",
-            input_names=["x", ],
-            output_names=["output", ],
-            opset_version=17)
-        
-        # 插入量化和反量化节点
-        insert_quant_dequant_nodes(
-            "./data.ignore/mlp.onnx",
-            "./data.ignore/mlp_qdq.onnx",
-            target_tensors=["x", "layer0.weight", "layer0.bias", "/layer0/Gemm_output_0"]
-        )
+            if scale is None or zero_point is None:
+                raise ValueError(f"Missing scale or zero_point for QuantizeLinear node: {node.name}")
+
+            # 查找对应的 initializer
+            for initializer in graph.initializer:
+                if initializer.name == input_name:
+                    # 获取浮点数据
+                    float_data = numpy_helper.to_array(initializer)
+
+                    # 执行量化操作
+                    quantized_data = np.round(float_data / scale) + zero_point
+                    dtype_info = np.iinfo(zero_point.dtype)
+                    quantized_data = np.clip(quantized_data, dtype_info.min, dtype_info.max).astype(zero_point.dtype)  # 假设目标类型是 uint8
+
+                    # 更新 initializer 数据
+                    new_initializer = numpy_helper.from_array(quantized_data, name=output_name)
+                    graph.initializer.remove(initializer)  # 移除原始 initializer
+                    graph.initializer.append(new_initializer)  # 添加量化后的 initializer
+                    
+                    # 更新下一个节点的输入
+                    for next_node in graph.node:
+                        for i, inp in enumerate(next_node.input):
+                            if inp == input_name:
+                                next_node.input[i] = output_name
+                                break
+
+                    unused_nodes.append(node)
+                    break
+
+    #remove_unused_nodes(graph)
+    for node in unused_nodes:
+        graph.node.remove(node)
+                    
+
+def test_mlp_export_onnx_and_qdq():
+    
+    model = MLP()
+    example_x = torch.empty(97, 8, dtype=torch.float32)
+
+    torch.onnx.export(
+        model,
+        (example_x,),
+        "./data.ignore/mlp.onnx",
+        input_names=["x", ],
+        output_names=["output", ],
+        opset_version=17,
+        dynamic_axes={
+            "x": {0: "batch_size"},
+            "output": {0: "batch_size"},
+        })
+    
+    # 插入量化和反量化节点
+    insert_quant_dequant_nodes(
+        "./data.ignore/mlp.onnx",
+        "./data.ignore/mlp_qdq.onnx",
+        target_tensors={
+            "x": [np.int8, 0.5, 20], 
+            "layer0.weight": [np.int8, 0.5, 20], 
+            "layer0.bias": [np.int32, 0.25, 20], 
+            "/layer0/Gemm_output_0": [np.int8, 2.0, 20]
+        }
+    )
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.DEBUG)
-    # Run unit tests
-    unittest.main()
+    test_mlp_export_onnx_and_qdq()
