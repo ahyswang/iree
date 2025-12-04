@@ -1,18 +1,17 @@
 export PATH=`pwd`/../../build/tools/:$PATH
 source ../../.venv/bin/activate
 
-WORKDIR="./data.ignore/"
+WORKDIR="./data.ignore"
 mkdir -p ${WORKDIR}
-cp 1.tflite ${WORKDIR}/
-
-# Fetch a model from https://www.kaggle.com/models/tensorflow/posenet-mobilenet
-#TFLITE_URL="https://www.kaggle.com/api/v1/models/tensorflow/posenet-mobilenet/tfLite/float-075/1/download"
-#curl -L -o posenet.tar.gz ${TFLITE_URL}
-#tar xf posenet.tar.gz
 
 TFLITE_PATH=${WORKDIR}/1.tflite
 IMPORT_PATH=${WORKDIR}/tosa.mlir
 MODULE_PATH=${WORKDIR}/module.vmfb
+
+# 
+python net-tf.py
+
+cp simple_l_quantized.tflite ${WORKDIR}/1.tflite
 
 # Import the model to MLIR (in the TOSA dialect) so IREE can compile it.
 iree-import-tflite ${TFLITE_PATH} -o ${IMPORT_PATH}
@@ -24,4 +23,8 @@ iree-compile \
     --iree-llvmcpu-target-cpu=generic   \
     --dump-compilation-phases-to=$WORKDIR \
     ${IMPORT_PATH} \
-    -o ${MODULE_PATH}
+    -o ${MODULE_PATH} \
+    --mlir-print-ir-after-all \
+    --mlir-print-ir-after-change \
+    --mlir-print-ir-before-all \
+    > $WORKDIR/log.txt 2>&1
