@@ -82,5 +82,5 @@ def test_quant_linear_perchannel():
 
 if __name__ == "__main__":
     #test_quant_matmul()
-    #test_quant_linear()
-    test_quant_linear_perchannel()
+    test_quant_linear()
+    #test_quant_linear_perchannel()

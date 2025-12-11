@@ -23,7 +23,7 @@ class SimpleCNN(nn.Module):
         # x = x.view(x.size(0), -1)
         # x = self.fc(x)
         # x=F.softmax(x,dim=-1)
-        # x=x+x
+        x=x+x
         y=self.fc(y)
         z=torch.matmul(x,y)
         return z
@@ -94,7 +94,7 @@ try:
         quant_format=QuantFormat.QDQ,  # 用qdq方式量化
 
         activation_type=QuantType.QInt8,
-        weight_type=QuantType.QInt4,
+        weight_type=QuantType.QInt8,
         nodes_to_exclude=['/Softmax'],
         per_channel=True
         # optimize_model=False

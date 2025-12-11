@@ -1,4 +1,6 @@
 // RUN:iree-compile --iree-hal-target-device=local --compile-to=input
+// iree-opt '-pass-pipeline=builtin.module(func.func(torch-convert-custom-quant-op))' ./ops_custom-quant.mlir -o ./ops_custom-quant.mlir_custom_quant.mlir
+// iree-compile --iree-hal-target-device=local --compile-to=input ./ops_custom-quant.mlir_custom_quant.mlir -o -
 
 func.func @forward(%arg0: !torch.vtensor<[1,1,2],f16>) -> !torch.vtensor<[1,1,2],f16> attributes {torch.onnx_meta.ir_version = 7 : si64, torch.onnx_meta.opset_version = 14 : si64, torch.onnx_meta.opset_versions = {com.microsoft = 1 : si64}, torch.onnx_meta.producer_name = "onnxruntime-genai", torch.onnx_meta.producer_version = "0.0.0"} {
   %q_rhs = torch.vtensor.literal(dense<[[0, 1], [2, 3]]> : tensor<2x2xui8>) : !torch.vtensor<[2,2],ui8>

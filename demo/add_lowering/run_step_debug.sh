@@ -1,6 +1,6 @@
 export PATH=`pwd`/../../build/tools/:$PATH
 
-save_dir=./data.ignore/add_lowering/
+save_dir=./data.ignore/add_lowering_debug/
 mkdir -p $save_dir
 
 # input_mlir=add.mlir
@@ -10,6 +10,7 @@ input_mlir=add_onnx.mlir
 # input_mlir=add_linalg.mlir
 
 iree-compile $input_mlir \
+--iree-flow-trace-dispatch-tensors \
 --iree-hal-target-device=local \
 --iree-hal-local-target-device-backends=llvm-cpu \
 --iree-llvmcpu-target-cpu=generic   \
@@ -25,9 +26,9 @@ iree-run-module   \
 --module=$save_dir/add_lowering.vmfb   \
 --device=local-task   \
 --function=main    \
---input=10xf8E4M3=[1,2,3,4,5,6,7,8,9,10] \
---input=10xf8E4M3=[1,2,3,4,5,6,7,8,9,10] \
---expected_output=10xf8E4M3=[2,4,6,8,10,12,14,16,18,20]
+--input=10xi32=[1,2,3,4,5,6,7,8,9,10] \
+--input=10xi32=[1,2,3,4,5,6,7,8,9,10] \
+--expected_output=10xi32=[2,4,6,8,10,12,14,16,18,20]
 
 exit 
 

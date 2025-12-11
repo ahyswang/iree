@@ -5,17 +5,60 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python Debugger: Attach",
+            "type": "python",
+            "request": "attach",
+            "justMyCode": false,
+            "connect": {
+                "host": "localhost",
+                "port": 5678
+            }
+        },
+        {
+            "name": "sharkai",
+            "type": "debugpy",
+            "request": "launch",
+            "python": "/workspace/yswang26/python_env/amd-shark-ai/bin/python",
+            "program": "/workspace/yswang26/python_env/amd-shark-ai/lib/python3.12/site-packages/sharktank/examples/export_paged_llm_v1.py",
+            "console": "integratedTerminal",
+            "args": "--gguf-file=/workspace/kuihu3/code/iree/data.ignore/open-llama-3b-q4_1.gguf   --output-mlir=./data.ignore/open-llama-3b-q4_1/llama-3b-q4_1.mlir   --output-config=./data.ignore/open-llama-3b-q4_1/llama-3b-q4_1.config   --bs-prefill=1   --bs-decode=1",
+            "cwd": "${workspaceFolder}/demo/sharkai"
+        },
+        {
+            "name": "pytorch",
+            "type": "debugpy",
+            "request": "launch",
+            "python": "/workspace/yswang26/opt/miniforge3/bin/python",
+            "program": "/workspace/yswang26/iree/demo/pytorch/demo_2.py",
+            "console": "integratedTerminal",
+            "args": "",
+            "cwd": "${workspaceFolder}/demo/pytorch"
+        },
+        {
+            "name": "Python Debugger: Current File with Arguments",
+            "type": "debugpy",
+            "request": "launch",
+            "python": "/workspace/yswang26/opt/miniforge3/bin/python",
+            "program": "/workspace/yswang26/opt/miniforge3/bin/iree-import-onnx",
+            "console": "integratedTerminal",
+            "args": "../../../llm/onnx-community-Qwen3-0.6B/model_q4f16.onnx -o model_q4f16.onnx.mlir --large-model --externalize-params",
+            "cwd": "${workspaceFolder}/demo/qwen3_0.6b_q4f16"
+        },
+        {
             "type": "lldb-dap",
             "request": "launch",
             "name": "Debug",
             "program": "${workspaceFolder}/build/tools/iree-compile",
-            "args": ["mobilenetv2.mlir",
-                "--iree-hal-target-device=local",   
-                "--iree-hal-local-target-device-backends=llvm-cpu",   
-                "--iree-llvmcpu-target-cpu=generic",     
-                "--iree-llvmcpu-link-embedded=false",   
-                "--dump-compilation-phases-to=/tmp/iree/mobilenetv2",   
-                "-o", "/tmp/iree/simple_abs/mobilenetv2.vmfb"],
+            "args": [
+                "mobilenetv2.mlir",
+                "--iree-hal-target-device=local",
+                "--iree-hal-local-target-device-backends=llvm-cpu",
+                "--iree-llvmcpu-target-cpu=generic",
+                "--iree-llvmcpu-link-embedded=false",
+                "--dump-compilation-phases-to=/tmp/iree/mobilenetv2",
+                "-o",
+                "/tmp/iree/simple_abs/mobilenetv2.vmfb"
+            ],
             "env": [
                 "PATH=/workspace/yswang26/opt/llvm/bin:${env:PATH}"
             ],
@@ -26,14 +69,40 @@
             "request": "launch",
             "name": "add_lowering_compiler",
             "program": "${workspaceFolder}/build/tools/iree-compile",
-            "args": ["myadd_onnx.mlir",
-                "--iree-hal-target-device=local",   
-                "--iree-hal-local-target-device-backends=llvm-cpu",   
-                "--iree-llvmcpu-target-cpu=generic",     
-                "--iree-llvmcpu-link-embedded=false",   
-                "--dump-compilation-phases-to=/tmp/iree/add_lowering",   
-                "-o", "-",
-                "--mlir-print-ir-after-all", "--mlir-print-ir-before-all"],
+            "args": [
+                "add_onnx.mlir",
+                "--iree-hal-target-device=local",
+                "--iree-hal-local-target-device-backends=llvm-cpu",
+                "--iree-llvmcpu-target-cpu=generic",
+                "--iree-llvmcpu-link-embedded=false",
+                "--dump-compilation-phases-to=/tmp/iree/add_lowering",
+                "-o",
+                "-",
+                "--mlir-print-ir-after-all",
+                "--mlir-print-ir-before-all"
+            ],
+            "env": [
+                "PATH=/workspace/yswang26/opt/llvm/bin:${env:PATH}"
+            ],
+            "cwd": "${workspaceFolder}/demo/add_lowering",
+        },
+        {
+            "type": "lldb-dap",
+            "request": "launch",
+            "name": "myadd_lowering_compiler",
+            "program": "${workspaceFolder}/build/tools/iree-compile",
+            "args": [
+                "myadd_onnx.mlir",
+                "--iree-hal-target-device=local",
+                "--iree-hal-local-target-device-backends=llvm-cpu",
+                "--iree-llvmcpu-target-cpu=generic",
+                "--iree-llvmcpu-link-embedded=false",
+                "--dump-compilation-phases-to=/tmp/iree/add_lowering",
+                "-o",
+                "-",
+                "--mlir-print-ir-after-all",
+                "--mlir-print-ir-before-all"
+            ],
             "env": [
                 "PATH=/workspace/yswang26/opt/llvm/bin:${env:PATH}"
             ],
@@ -42,15 +111,54 @@
         {
             "type": "lldb-dap",
             "request": "launch",
+            "name": "mlir_compiler",
+            "program": "${workspaceFolder}/build/tools/iree-compile",
+            "args": [
+                "ops_quant.mlir",
+                "--compile-to=input",
+                "-o",
+                "-",
+                "--mlir-print-ir-after-all",
+                "--mlir-print-ir-before-all"
+            ],
+            "env": [
+                "PATH=/workspace/yswang26/opt/llvm/bin:${env:PATH}"
+            ],
+            "cwd": "${workspaceFolder}/demo/mlir/stablehlo",
+        },
+        {
+            "type": "lldb-dap",
+            "request": "launch",
+            "name": "add_lowering_vulkan",
+            "program": "${workspaceFolder}/build/tools/iree-compile",
+            "args": [
+                "matmul.mlir",
+                "--iree-hal-target-device=vulkan",
+                "--iree-llvmcpu-link-embedded=false",
+                "--dump-compilation-phases-to=/tmp/iree/add_lowering",
+                "-o",
+                "-",
+                "--mlir-print-ir-after-all",
+                "--mlir-print-ir-before-all"
+            ],
+            "env": [
+                "PATH=/workspace/yswang26/opt/llvm/bin:${env:PATH}"
+            ],
+            "cwd": "${workspaceFolder}/demo/add_lowering",
+        },
+        {
+            "type": "lldb-dap",
+            "request": "launch",
             "name": "add_lowering_run",
             "program": "${workspaceFolder}/build/tools/iree-run-module",
-            "args": ["add.mlir",
+            "args": [
+                "add.mlir",
                 "--module=./data.ignore/add_lowering/add_lowering.vmfb",
                 "--device=local-task",
                 "--function=main",
                 "--input=10xi32=[1,2,3,4,5,6,7,8,9,10]",
                 "--input=10xi32=[1,2,3,4,5,6,7,8,9,10]",
-                "--expected_output=10xi32=[2,4,6,8,10,12,14,16,18,20]"   
+                "--expected_output=10xi32=[2,4,6,8,10,12,14,16,18,20]"
             ],
             "env": [
                 "PATH=/workspace/yswang26/opt/llvm/bin:${env:PATH}"
@@ -63,11 +171,44 @@
             "request": "launch",
             "name": "simple_io_sample",
             "program": "${workspaceFolder}/build/tools/iree-compile",
-            "args": ["--iree-plugin=simple_io_sample", "--iree-print-plugin-info", "--pass-pipeline=builtin.module(iree-simpleio-legalize)", "print.mlir"],
+            "args": [
+                "--iree-plugin=simple_io_sample",
+                "--iree-print-plugin-info",
+                "--pass-pipeline=builtin.module(iree-simpleio-legalize)",
+                "print.mlir"
+            ],
             "env": [
                 "PATH=/workspace/yswang26/opt/llvm/bin:${env:PATH}"
             ],
             "cwd": "${workspaceFolder}/samples/compiler_plugins/simple_io_sample/test",
-        }
+        },
+        {
+            "type": "lldb-dap",
+            "request": "launch",
+            "name": "compiler_simple",
+            "program": "${workspaceFolder}/build/tools/iree-compile",
+            "args": [
+                //"/workspace/yswang26/iree/demo/qwen3_0.6b_q4f16/linalg/rotaryembedding.mlir",
+                //"/workspace/yswang26/iree/third_party/torch-mlir/test/Dialect/TorchConversion/convert-custom-quant-op.mlir",
+                //"/workspace/yswang26/iree/demo/onnx_qdq/data.ignore/mlp_qdq.mlir",
+                //"/workspace/yswang26/iree/demo/mlir/torch/quant_dequant_perblock.mlir",
+                //"/workspace/yswang26/iree/demo/add_lowering/mix.onnx_noshape_v2_norank.mlir",
+                "/workspace/yswang26/iree/demo.mlir",
+                "--iree-hal-target-device=local",
+                "--iree-hal-local-target-device-backends=llvm-cpu",
+                "--iree-llvmcpu-target-cpu=generic",
+                "--iree-llvmcpu-link-embedded=false",
+                "--dump-compilation-phases-to=/tmp/iree/add_lowering",
+                "-o",
+                "-",
+                "--mlir-print-ir-after-all",
+                "--mlir-print-ir-before-all",
+                "--compile-to=vm"
+            ],
+            "env": [
+                "PATH=/workspace/yswang26/opt/llvm/bin:${env:PATH}"
+            ],
+            "cwd": "${workspaceFolder}/",
+        },
     ]
 }
