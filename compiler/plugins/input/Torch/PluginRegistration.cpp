@@ -77,6 +77,7 @@ struct TorchSession
       torchOnnxPipelineOptions.decompose = options.decompose;
       torchOnnxPipelineOptions.backendLegalOps =
           TorchInput::BackendLegalOps::get();
+      passManager.addNestedPass<func::FuncOp>(TorchInput::createCreateBindAttrPass());
       mlir::torch::Torch::createTorchOnnxToTorchBackendPipeline(
           passManager, torchOnnxPipelineOptions);
     }

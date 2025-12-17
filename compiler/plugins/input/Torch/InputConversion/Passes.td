@@ -43,4 +43,12 @@ def FuncConversionPass :
   }];
 }
 
+def CreateBindAttrPass :
+    InterfacePass<"torch-iree-create-bind-attr", "mlir::FunctionOpInterface"> {
+  let summary = "Create binding attributes op.";
+  let description = [{
+    This pass creates binding attributes op for Torch ONNX operations.
+  }];
+}
+
 #endif // IREE_COMPILER_PLUGINS_INPUT_TORCH_INPUTCONVERSION_PASSES
