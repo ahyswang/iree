@@ -25,7 +25,7 @@ public:
   using OpRewritePattern::OpRewritePattern;
   LogicalResult matchAndRewrite(torch::Torch::OperatorOp op,
                                 PatternRewriter &rewriter) const override {
-    llvm::outs() << "CreateCommBindAttr Visiting op: " << op.getName() << "\n";        
+    //llvm::outs() << "CreateCommBindAttr Visiting op: " << op.getName() << "\n";        
     if (op->hasAttr("custom_bind_attr_status")) {
         return failure();
     }
@@ -79,7 +79,7 @@ public:
     op->setAttr("custom_bind_attr_status", doneAttr);
     op->setOperand(0, bindA);
     
-    llvm::outs() << "Successfully added custom_bind_attr_status to op: " << op.getName() << "\n";
+    //llvm::outs() << "Successfully added custom_bind_attr_status to op: " << op.getName() << "\n";
 
     return success();
   }
