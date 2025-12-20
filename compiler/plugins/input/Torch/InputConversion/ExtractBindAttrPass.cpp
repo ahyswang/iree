@@ -14,7 +14,7 @@
 
 namespace mlir::iree_compiler::TorchInput {
 
-#define GEN_PASS_DEF_CREATEBINDATTRPASS
+#define GEN_PASS_DEF_EXTRACTBINDATTRPASS
 #include "compiler/plugins/input/Torch/InputConversion/Passes.h.inc"
 
 namespace {
@@ -26,7 +26,7 @@ public:
   LogicalResult matchAndRewrite(torch::Torch::OperatorOp op,
                                 PatternRewriter &rewriter) const override {
     //llvm::outs() << "CreateCommBindAttr Visiting op: " << op.getName() << "\n";        
-    if (op->hasAttr("custom_bind_attr_status")) {
+    if (op->hasAttr("torch.onnx.custom_bind_attr_status")) {
         return failure();
     }
 
@@ -64,7 +64,8 @@ public:
 
     auto bindA = rewriter.create<torch::Torch::AtenBindAttrOp>(
         op.getLoc(), bindAType, A);
-    bindA->setAttr("custom_bind_attr_status", rewriter.getStringAttr("done"));
+    bindA->setAttr("torch.onnx.custom_bind_attr_status", rewriter.getStringAttr("done"));
+    bindA->setAttr("torch.onnx.operator", rewriter.getStringAttr("bind_attr"));
     auto attrs = op->getAttrs();
     for (auto itAttr = attrs.begin(); itAttr != attrs.end(); ++itAttr) {
         StringRef attrName = itAttr->getName();
@@ -89,8 +90,8 @@ public:
 
 namespace {
 
-class CreateBindAttrPass final 
-        : public impl::CreateBindAttrPassBase<CreateBindAttrPass> {
+class ExtractBindAttrPass final 
+        : public impl::ExtractBindAttrPassBase<ExtractBindAttrPass> {
     void getDependentDialects(DialectRegistry &registry) const override {
         registry.insert<torch::Torch::TorchDialect>();
     }

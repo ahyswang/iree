@@ -43,7 +43,7 @@ def FuncConversionPass :
   }];
 }
 
-def CreateBindAttrPass :
+def ExtractBindAttrPass :
     InterfacePass<"torch-iree-create-bind-attr", "mlir::FunctionOpInterface"> {
   let summary = "Create binding attributes op.";
   let description = [{

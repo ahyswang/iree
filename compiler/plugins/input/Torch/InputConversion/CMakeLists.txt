@@ -34,7 +34,7 @@ iree_cc_library(
   HDRS
     "Passes.h"
   SRCS
-    "CreateBindAttrPass.cpp"
+    "ExtractBindAttrPass.cpp"
     "BindSymbolicShapes.cpp"
     "BitCastTensor.cpp"
     "ConvertTMTensorToLinalgExt.cpp"
