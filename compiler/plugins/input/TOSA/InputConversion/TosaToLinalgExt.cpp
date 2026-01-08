@@ -101,7 +101,7 @@ public:
                                                   blockBuilder)
                        .getResult(0);
       }
-
+      
       indicesTy = llvm::cast<RankedTensorType>(indicesTy.clone(
           {indicesTy.getDimSize(0), indicesTy.getDimSize(1), 2}));
       indices = builder.create<tosa::ConcatOp>(indicesTy,
@@ -149,6 +149,54 @@ public:
   }
 };
 
+class MyAddConversion : public OpRewritePattern<tosa::CustomOp> {
+public:
+  using OpRewritePattern<tosa::CustomOp>::OpRewritePattern;
+  LogicalResult matchAndRewrite(tosa::CustomOp op,
+                                PatternRewriter &rewriter) const final {
+    if (op.getOperatorNameAttr() != "MyAdd")
+      return failure();
+
+    auto lhs = op.getOperands()[0];
+    auto rhs = op.getOperands()[1];
+    auto resultType = op.getResultTypes()[0];
+
+    auto lhsTensorType = llvm::dyn_cast<RankedTensorType>(lhs.getType());
+    auto rhsTensorType = llvm::dyn_cast<RankedTensorType>(rhs.getType());
+    auto resultTensorType = llvm::dyn_cast<RankedTensorType>(resultType);
+
+    if (!lhsTensorType || !rhsTensorType || !resultTensorType)
+      return rewriter.notifyMatchFailure(op, "unranked tensor types");
+
+    llvm::SmallVector<Value> castDynSizes;
+    for (auto [index, dim] : llvm::enumerate(resultTensorType.getShape())) {
+      if (ShapedType::isDynamic(dim)) {
+        castDynSizes.push_back(rewriter.create<tensor::DimOp>(op.getLoc(), lhs, index));
+      }
+    }
+    auto empty = rewriter.create<tensor::EmptyOp>(op.getLoc(), resultType, castDynSizes);
+    
+    llvm::SmallVector<utils::IteratorType> iterators(resultTensorType.getRank(), utils::IteratorType::parallel);
+    llvm::SmallVector<AffineMap> maps(3, {rewriter.getMultiDimIdentityMap(resultTensorType.getRank())});
+    
+    auto linalgOp = rewriter.create<linalg::GenericOp>(
+      op.getLoc(), resultTensorType, ValueRange{lhs, rhs},
+      ValueRange{empty}, 
+      maps,
+      iterators,
+      [&](OpBuilder &b, Location loc, ValueRange args) {
+        Value lhs = args[0];
+        Value rhs = args[1];
+        Value add = b.create<arith::AddIOp>(loc, resultTensorType.getElementType(), lhs, rhs); 
+        b.create<linalg::YieldOp>(loc, add);
+      });
+      
+    //auto addOp = rewriter.create<tosa::AddOp>(op.getLoc(), resultType, lhs, rhs);
+    rewriter.replaceOpWithNewOp<tensor::CastOp>(op, resultType, linalgOp.getResult(0));
+    return success();
+  }
+};
+
 class TosaToLinalgExtPass final
     : public impl::TosaToLinalgExtPassBase<TosaToLinalgExtPass> {
 public:
@@ -156,6 +204,7 @@ public:
     RewritePatternSet patterns(&getContext());
     ConversionTarget target(getContext());
     target.addIllegalOp<tosa::ScatterOp>();
+    target.addIllegalOp<tosa::CustomOp>();
     target.markUnknownOpDynamicallyLegal([](Operation *) { return true; });
 
     FunctionOpInterface func = getOperation();
@@ -169,6 +218,7 @@ public:
 
 void populateTosaToLinalgExtPatterns(RewritePatternSet *patterns) {
   patterns->add<ScatterConversion>(patterns->getContext());
+  patterns->add<MyAddConversion>(patterns->getContext());
 }
 
 } // namespace mlir::iree_compiler
