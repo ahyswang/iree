@@ -1,12 +1,15 @@
 export PATH=`pwd`/../../build/tools/:$PATH
 
+#/workspace/yswang26/iree/compiler/src/iree/compiler/Dialect/Flow/Transforms/InjectTensorTracing.cpp
+#/workspace/yswang26/iree/compiler/src/iree/compiler/Dialect/Flow/Transforms/InjectDispatchTracing.cpp
+
 save_dir=./data.ignore/add_lowering_debug/
 mkdir -p $save_dir
 
 # input_mlir=add.mlir
 # input_mlir=add_tosa.mlir
 # input_mlir=matrix.mlir
-input_mlir=add_onnx.mlir
+input_mlir=add_linalg_debug.mlir
 # input_mlir=add_linalg.mlir
 
 iree-compile $input_mlir \
