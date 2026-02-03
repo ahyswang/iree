@@ -48,26 +48,32 @@ module @example {
   // CHECK-LABEL: EXEC @main
   func.func @main() {
     // Create string from a byte buffer encoding the characters.
-    %hello_bytes = util.unfoldable_constant dense<[0, 1, 2, 3, 4]> : tensor<5xi8>
-    %hello_arg = tensor.cast %hello_bytes : tensor<5xi8> to tensor<?xi8>
+    %0 = util.unfoldable_constant dense<[0, 1, 2, 3, 4]> : tensor<5xi8>
+
+    // call linalg.add
+    %add1 = tensor.empty() : tensor<5xi8>
+    %add2 = linalg.generic {indexing_maps = [affine_map<(d0) -> (d0)>, affine_map<(d0) -> (d0)>, affine_map<(d0) -> (d0)>], iterator_types = ["parallel"]} ins(%0, %0 : tensor<5xi8>, tensor<5xi8>) outs(%add1 : tensor<5xi8>) {
+    ^bb0(%in: i8, %in_0: i8, %out: i8):
+      %6 = arith.addi %in, %in_0 : i8
+      linalg.yield %6 : i8
+    } -> tensor<5xi8>
+    %add2_arg = tensor.cast %add2 : tensor<5xi8> to tensor<?xi8>
     // CHECK-NEXT: CREATE 5xi8=0 1 2 3 4
-    %hello_str = call @custom.string.from_tensor(%hello_arg) : (tensor<?xi8>) -> !custom.string
+    %result0_str = call @custom.string.from_tensor(%add2_arg) : (tensor<?xi8>) -> !custom.string
+    call @custom.string.print(%result0_str) : (!custom.string) -> ()
 
-    // Print the string to stdout.
-    // CHECK-NEXT: PRINT 5xi8=0 1 2 3 4
-    call @custom.string.print(%hello_str) : (!custom.string) -> ()
-
+    // call nebula.add
     %cst0 = arith.constant 0 : index
-    %dim = tensor.dim %hello_arg, %cst0 : tensor<?xi8>
+    %dim = tensor.dim %add2, %cst0 : tensor<5xi8>
     %result = tensor.empty(%dim) : tensor<?xi8>
 
-    //call @custom.custom.add(%hello_arg, %hello_arg, %result) : (tensor<?xi8>, tensor<?xi8>, tensor<?xi8>) -> ()
-    call @nebula.add(%hello_arg, %hello_arg, %result) : (tensor<?xi8>, tensor<?xi8>, tensor<?xi8>) -> ()
+    %arg = tensor.cast %0 : tensor<5xi8> to tensor<?xi8>
+    call @nebula.add(%arg, %arg, %result) : (tensor<?xi8>, tensor<?xi8>, tensor<?xi8>) -> ()
 
-    %result_arg = tensor.cast %result : tensor<?xi8> to tensor<?xi8>
+    %result1_arg = tensor.cast %result : tensor<?xi8> to tensor<?xi8>
     // CHECK-NEXT: CREATE 5xi8=0 1 2 3 4
-    %result_str = call @custom.string.from_tensor(%result_arg) : (tensor<?xi8>) -> !custom.string
-    call @custom.string.print(%result_str) : (!custom.string) -> ()
+    %result1_str = call @custom.string.from_tensor(%result1_arg) : (tensor<?xi8>) -> !custom.string
+    call @custom.string.print(%result1_str) : (!custom.string) -> ()
 
     // Test scalar addition
     %scalar_val_0 = arith.constant 100 : i32

@@ -13,7 +13,7 @@ if(IREE_ENABLE_RUNTIME_TRACING)
 endif()
 
 set(_NAME "iree_samples_custom_module_dynamic_module")
-add_library(${_NAME} SHARED module.cc)
+add_library(${_NAME} SHARED module.cc module_nebula.cc)
 target_link_libraries(${_NAME}
   iree_base_base
   iree_hal_hal

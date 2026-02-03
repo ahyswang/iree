@@ -4,10 +4,15 @@
 // See https://llvm.org/LICENSE.txt for license information.
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
+#include <cstdint>
 #include <cstdio>
 
 #include "iree/base/api.h"
+#include "iree/base/config.h"
+#include "iree/base/status.h"
 #include "iree/hal/api.h"
+#include "iree/hal/buffer.h"
+#include "iree/hal/buffer_view.h"
 #include "iree/modules/hal/types.h"
 #include "iree/vm/api.h"
 #include "iree/vm/dynamic/api.h"
@@ -153,6 +158,81 @@ class CustomModuleState final {
     return iree_make_status(IREE_STATUS_UNKNOWN, "Forced failure");
   }
 
+   // 
+   Status CustomAdd(
+    vm::ref<iree_hal_buffer_view_t> buffer_view0, 
+    vm::ref<iree_hal_buffer_view_t> buffer_view1,
+    vm::ref<iree_hal_buffer_view_t> buffer_view_out) {
+      
+    iree_host_size_t rank = iree_hal_buffer_view_shape_rank(buffer_view0.get());
+    if (rank != 1) {
+      return iree_make_status(IREE_STATUS_INVALID_ARGUMENT,
+                              "Only rank-1 buffers are supported");
+    }
+
+    fprintf(stdout, "CUSTOM ADD RANK=%" PRIhsz "\n", rank);
+    for (iree_host_size_t i = 0; i < rank; ++i) {
+      iree_hal_dim_t dim0 =
+          iree_hal_buffer_view_shape_dim(buffer_view0.get(), i);
+      iree_hal_dim_t dim1 =
+          iree_hal_buffer_view_shape_dim(buffer_view1.get(), i);
+      iree_hal_dim_t dim_out =
+          iree_hal_buffer_view_shape_dim(buffer_view_out.get(), i);
+      if (dim0 != dim1 || dim0 != dim_out) {
+        return iree_make_status(IREE_STATUS_INVALID_ARGUMENT,
+                                "Mismatched shape dimensions at index %" PRIhsz
+                                ": %" PRIdim " vs %" PRIdim " vs %" PRIdim,
+                                i, dim0, dim1, dim_out);
+      }
+      fprintf(stdout, "  DIM[%" PRIhsz "] = %" PRIdim "\n", i, dim0);
+    }
+
+    
+    iree_hal_buffer_t* buffer0 = iree_hal_buffer_view_buffer(buffer_view0.get());
+    iree_device_size_t write_length0 =
+        iree_hal_buffer_view_byte_length(buffer_view0.get());
+    iree_hal_buffer_mapping_t mapping0;
+    IREE_RETURN_IF_ERROR(iree_hal_buffer_map_range(
+        buffer0, IREE_HAL_MAPPING_MODE_SCOPED, IREE_HAL_MEMORY_ACCESS_READ, 0,
+        write_length0, &mapping0));
+    
+    iree_hal_buffer_t* buffer1 = iree_hal_buffer_view_buffer(buffer_view1.get());
+    iree_device_size_t write_length1 =
+        iree_hal_buffer_view_byte_length(buffer_view1.get());
+    iree_hal_buffer_mapping_t mapping1;
+    IREE_RETURN_IF_ERROR(iree_hal_buffer_map_range(
+        buffer1, IREE_HAL_MAPPING_MODE_SCOPED, IREE_HAL_MEMORY_ACCESS_READ, 0,
+        write_length1, &mapping1));
+        
+    iree_hal_buffer_t* buffer2 = iree_hal_buffer_view_buffer(buffer_view_out.get());
+    iree_device_size_t write_length2 =
+        iree_hal_buffer_view_byte_length(buffer_view_out.get());
+    iree_hal_buffer_mapping_t mapping2;
+    IREE_RETURN_IF_ERROR(iree_hal_buffer_map_range(
+        buffer2, IREE_HAL_MAPPING_MODE_SCOPED, IREE_HAL_MEMORY_ACCESS_WRITE, 0,
+        write_length2, &mapping2));
+        
+    for (iree_host_size_t i = 0; i < iree_hal_buffer_view_element_count(buffer_view0.get()); ++i) {
+      
+      int8_t* data0 = NULL;
+      int8_t* data1 = NULL;
+      int8_t* data_out = NULL;
+      
+      data0 = (int8_t*)((int8_t*)mapping0.contents.data + i * sizeof(int8_t));  
+      data1 = (int8_t*)((int8_t*)mapping1.contents.data + i * sizeof(int8_t)); 
+      data_out = (int8_t*)((int8_t*)mapping2.contents.data + i * sizeof(int8_t));
+
+      data_out[0] = data0[0] + data1[0];
+      fprintf(stdout, "  ADD[%" PRIhsz "] = %d + %d = %d\n", i, data0[0], data1[0], data_out[0]);
+    }
+
+    IREE_IGNORE_ERROR(iree_hal_buffer_unmap_range(&mapping0));
+    IREE_IGNORE_ERROR(iree_hal_buffer_unmap_range(&mapping1));;
+    IREE_IGNORE_ERROR(iree_hal_buffer_unmap_range(&mapping2));;
+
+    return iree_ok_status();
+  }
+
  private:
   // Allocator that the caller requested we use for any allocations we need to
   // perform during operation.
@@ -165,6 +245,7 @@ static const vm::NativeFunction<CustomModuleState> kCustomModuleFunctions[] = {
                            &CustomModuleState::StringFromTensor),
     vm::MakeNativeFunction("string.print", &CustomModuleState::StringPrint),
     vm::MakeNativeFunction("error", &CustomModuleState::ThrowError),
+    vm::MakeNativeFunction("custom.add", &CustomModuleState::CustomAdd),
 };
 
 // The module instance that will be allocated and reused across contexts.
@@ -255,3 +336,5 @@ extern "C" IREE_VM_DYNAMIC_MODULE_EXPORT iree_status_t create_custom_module(
   *out_module = module.release()->interface();
   return iree_ok_status();
 }
+
+//#include "module_nebula.hpp"
