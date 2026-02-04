@@ -91,6 +91,8 @@ void createTorchToIREEPipeline(
   // linalg-on-tensors backend contract.
   pm.addNestedPass<IREE::Util::FuncOp>(
       torch::TorchConversion::createFinalizingBackendTypeConversionPass());
+
+  pm.addNestedPass<IREE::Util::FuncOp>(createConvertLinalgToLinalgExtPass());
 }
 
 void registerTMTensorConversionPasses() {

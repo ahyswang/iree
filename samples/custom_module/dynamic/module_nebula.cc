@@ -113,7 +113,8 @@ namespace {
             return lhs + rhs;
         }
 
-        Status Add(
+        StatusOr<vm::ref<iree_hal_buffer_view_t>>
+        Add(
             vm::ref<iree_hal_buffer_view_t> buffer_view0, 
             vm::ref<iree_hal_buffer_view_t> buffer_view1,
             vm::ref<iree_hal_buffer_view_t> buffer_view_out) {
@@ -147,8 +148,9 @@ namespace {
                 fprintf(stdout, "  ADD[%" PRIhsz "] = %d + %d = %d\n", i, data0[i], data1[i], data_out[i]);
             }
         
-            return iree_ok_status();
+            return buffer_view_out;
         }
+    
     
     private:
       // Allocator that the caller requested we use for any allocations we need to
@@ -159,7 +161,7 @@ namespace {
     // Function table mapping imported function names to their implementation.
     static const vm::NativeFunction<NebulaModuleState> kCustomModuleFunctions[] = {
         vm::MakeNativeFunction("add", &NebulaModuleState::Add),
-        vm::MakeNativeFunction("add_scalar", &NebulaModuleState::AddScale)
+        vm::MakeNativeFunction("add_scalar", &NebulaModuleState::AddScale),
     };
     
 

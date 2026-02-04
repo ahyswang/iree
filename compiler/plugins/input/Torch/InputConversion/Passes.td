@@ -51,4 +51,12 @@ def ExtractBindAttrPass :
   }];
 }
 
+def ConvertLinalgToLinalgExtPass :
+    InterfacePass<"torch-iree-convert-linalg-to-linalgext", "mlir::FunctionOpInterface"> {
+  let summary = "Convert linalg op to linalgext op.";
+  let description = [{
+    This pass converts linalg ops to linalgext ops for better codegen.
+  }];
+}
+
 #endif // IREE_COMPILER_PLUGINS_INPUT_TORCH_INPUTCONVERSION_PASSES
