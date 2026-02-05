@@ -3,7 +3,7 @@ cmake --build ./build/ --target iree_samples_custom_module_dynamic_module --targ
 ./build/tools/iree-compile  \
     --iree-hal-target-device=local  \
     --iree-hal-local-target-device-backends=vmvx  \
-    ./samples/custom_module/dynamic/test/example_linalg_add.mlir  \
+    ./samples/custom_module/dynamic/test/example.mlir  \
     -o=/tmp/example.vmfb \
     --dump-compilation-phases-to=./data.ignore/ \
     --mlir-print-ir-before-all \

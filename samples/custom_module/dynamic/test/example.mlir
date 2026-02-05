@@ -37,8 +37,9 @@ module @example {
   func.func private @custom.error()
 
   func.func private @custom.custom.add(tensor<?xi8>, tensor<?xi8>, tensor<?xi8>)
-  func.func private @nebula.add(tensor<?xi8>, tensor<?xi8>, tensor<?xi8>)
+  func.func private @nebula.add(tensor<?xi8>, tensor<?xi8>, tensor<?xi8>) -> tensor<?xi8>
   func.func private @nebula.add_scalar(i32, i32) -> i32
+  func.func private @nebula.add_list(!util.list<i32>, !util.list<i32>) -> i32
   //===--------------------------------------------------------------------===//
   // Sample methods
   //===--------------------------------------------------------------------===//
@@ -62,7 +63,7 @@ module @example {
     %result = tensor.empty(%dim) : tensor<?xi8>
 
     //call @custom.custom.add(%hello_arg, %hello_arg, %result) : (tensor<?xi8>, tensor<?xi8>, tensor<?xi8>) -> ()
-    call @nebula.add(%hello_arg, %hello_arg, %result) : (tensor<?xi8>, tensor<?xi8>, tensor<?xi8>) -> ()
+    %hello_result = call @nebula.add(%hello_arg, %hello_arg, %result) : (tensor<?xi8>, tensor<?xi8>, tensor<?xi8>) -> tensor<?xi8>
 
     %result_arg = tensor.cast %result : tensor<?xi8> to tensor<?xi8>
     // CHECK-NEXT: CREATE 5xi8=0 1 2 3 4
@@ -73,6 +74,16 @@ module @example {
     %scalar_val_0 = arith.constant 100 : i32
     %scalar_val_1 = arith.constant 200 : i32 
     %scalar_val_res = call  @nebula.add_scalar(%scalar_val_0, %scalar_val_1) : (i32, i32) -> i32
+
+    // Test list addition
+    %cap = arith.constant 1 : index
+    %lst = util.list.create %cap : !util.list<i32>
+    util.list.resize %lst, %cap : !util.list<i32>
+    %idx0 = arith.constant 0 : index
+    %val0 = arith.constant 10 : i32
+    util.list.set %lst[%idx0], %val0 : i32 -> !util.list<i32>
+
+    %ret2 = call @nebula.add_list(%lst, %lst) : (!util.list<i32>, !util.list<i32>) -> i32   // TODO: i8 -> i32 
 
     return
   }

@@ -17,8 +17,10 @@
 #include "iree/hal/buffer_view.h"
 #include "iree/vm/api.h"
 #include "iree/vm/dynamic/api.h"
+#include "iree/vm/list.h"
 #include "iree/vm/native_module_cc.h"
 #include "iree/vm/native_module_packing.h"
+#include "iree/vm/ref.h"
 
 //===----------------------------------------------------------------------===//
 // !custom.string type
@@ -101,6 +103,21 @@ namespace {
 
     };
     
+    static std::vector<iree_vm_value_t> GetValuesList(iree_vm_list_t* list) {
+        std::vector<iree_vm_value_t> result;
+        result.resize(iree_vm_list_size(list));
+        for (iree_host_size_t i = 0; i < result.size(); ++i) {
+            iree_vm_variant_t variant = iree_vm_variant_empty();
+            IREE_CHECK_OK(iree_vm_list_get_variant_assign(list, i, &variant));
+            if (iree_vm_variant_is_value(variant)) {
+            result[i] = iree_vm_variant_value(variant);
+            } else if (iree_vm_variant_is_ref(variant)) {
+            fprintf(stdout, "Found ref type in list, not handled yet.\n");
+            }
+        }
+        return result;
+    }
+
     class NebulaModuleState final {
     public:
         explicit NebulaModuleState(iree_allocator_t host_allocator)
@@ -111,6 +128,43 @@ namespace {
         {
             fprintf(stdout, "CUSTOM ADD SCALE: %d + %d = %d\n", lhs, rhs, lhs + rhs);
             return lhs + rhs;
+        }
+
+        StatusOr<int32_t> AddList(vm::ref<iree_vm_list_t> lhs, vm::ref<iree_vm_list_t> rhs)
+        {
+            iree_host_size_t lhsSize = iree_vm_list_size(lhs.get());
+            iree_host_size_t rhsSize = iree_vm_list_size(rhs.get());
+            if (lhsSize != rhsSize) {
+                return iree_make_status(IREE_STATUS_INVALID_ARGUMENT, "List size not match");
+            }
+            
+            printf("lhs size: %" PRIhsz ", rhs size: %" PRIhsz "\n", lhsSize, rhsSize);
+             
+            auto lhsValue = GetValuesList(lhs.get());
+            auto rhsValue = GetValuesList(rhs.get());
+
+            if (lhsValue.size() == 0 || rhsValue.size() == 0) {
+                return iree_make_status(IREE_STATUS_INVALID_ARGUMENT, "List is empty");
+            }
+
+            printf("type of first element in lhs: %d, rhs: %d\n", 
+                lhsValue[0].type,
+                rhsValue[0].type);   
+
+            if (lhsValue[0].type != IREE_VM_VALUE_TYPE_I32 ||
+                rhsValue[0].type != IREE_VM_VALUE_TYPE_I32) {
+                return iree_make_status(IREE_STATUS_INVALID_ARGUMENT, "Only int32 list is supported");
+            }
+            if (lhsValue.size() != rhsValue.size()) {
+                return iree_make_status(IREE_STATUS_INVALID_ARGUMENT, "List size not match");
+            }
+
+            for (size_t i = 0; i < lhsValue.size(); i++) {
+                int8_t result = lhsValue[i].i32 + rhsValue[i].i32;
+                fprintf(stdout, "  ADD LIST[%" PRIhsz "] = %d + %d = %d\n", i, lhsValue[i].i32, rhsValue[i].i32, result);
+            }
+            
+            return 0;
         }
 
         StatusOr<vm::ref<iree_hal_buffer_view_t>>
@@ -162,6 +216,7 @@ namespace {
     static const vm::NativeFunction<NebulaModuleState> kCustomModuleFunctions[] = {
         vm::MakeNativeFunction("add", &NebulaModuleState::Add),
         vm::MakeNativeFunction("add_scalar", &NebulaModuleState::AddScale),
+        vm::MakeNativeFunction("add_list", &NebulaModuleState::AddList),
     };
     
 

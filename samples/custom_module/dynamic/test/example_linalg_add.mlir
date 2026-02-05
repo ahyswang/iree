@@ -37,7 +37,7 @@ module @example {
   func.func private @custom.error()
 
   func.func private @custom.custom.add(tensor<?xi8>, tensor<?xi8>, tensor<?xi8>)
-  func.func private @nebula.add(tensor<?xi8>, tensor<?xi8>, tensor<?xi8>)
+  func.func private @nebula.add(tensor<?xi8>, tensor<?xi8>, tensor<?xi8>) -> tensor<?xi8>
   func.func private @nebula.add_scalar(i32, i32) -> i32
   //===--------------------------------------------------------------------===//
   // Sample methods
@@ -68,7 +68,7 @@ module @example {
     %result = tensor.empty(%dim) : tensor<?xi8>
 
     %arg = tensor.cast %0 : tensor<5xi8> to tensor<?xi8>
-    call @nebula.add(%arg, %arg, %result) : (tensor<?xi8>, tensor<?xi8>, tensor<?xi8>) -> ()
+    %result_2 = call @nebula.add(%arg, %arg, %result) : (tensor<?xi8>, tensor<?xi8>, tensor<?xi8>) -> tensor<?xi8>
 
     %result1_arg = tensor.cast %result : tensor<?xi8> to tensor<?xi8>
     // CHECK-NEXT: CREATE 5xi8=0 1 2 3 4
