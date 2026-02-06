@@ -19,6 +19,9 @@
 // globals, and no TLS.
 
 // The only header required from IREE:
+// #include <cstdint>
+#include <inttypes.h>
+#include <stdio.h>
 #include "iree/hal/local/executable_plugin.h"
 
 // `ret = lhs * rhs`
@@ -72,6 +75,36 @@ static int simple_mul_workgroup(void* params_ptr, void* context,
   return 0;
 }
 
+static int simple_add_workgroup(void* params_ptr, void* context,
+                                void* reserved) {
+  typedef struct {
+    const int32_t* restrict binding0;
+    size_t binding0_offset;
+    size_t binding0_stride;
+    const int32_t* restrict binding1;
+    size_t binding1_offset;
+    size_t binding1_stride;
+    size_t size;
+    int32_t* restrict binding2;
+    size_t binding2_offset;
+    size_t binding2_stride;
+  } params_t;
+  const params_t* params = (const params_t*)params_ptr;
+  // The operation `iree_codegen.ukernel.generic` always operates
+  // on a slice of the inputs to produce a slice of the output,
+  // so the loop here just needs to iterate from `0` to `size`,
+  // where `size` is the size of the slice to be executed by this call.
+  for (size_t i = 0; i < params->size; ++i) {
+    // The operation `iree_codegen.ukernel.generic` takes a slice of
+    // the inputs and outputs as operands. So the `pointer` and `offset`
+    // passed into this function represent the starting location of
+    // where to read the data from for this invocation of the function.
+    params->binding2[params->binding2_offset + i] =
+        params->binding0[params->binding0_offset + i] *
+        params->binding1[params->binding2_offset + i];
+  }
+  return 0;
+}
 // Called once for each plugin load and paired with a future call to unload.
 // We don't do anything special here as this plugin is meant to represent a
 // pure/stateless kernel library. Even in standalone mode we could allocate
@@ -111,6 +144,10 @@ static iree_hal_executable_plugin_status_t standalone_plugin_resolve(
     if (iree_hal_executable_plugin_strcmp(symbol_name,
                                           "simple_mul_workgroup") == 0) {
       params->out_fn_ptrs[i] = simple_mul_workgroup;
+      params->out_fn_contexts[i] = NULL;  // no context used, could be self
+    } else if (iree_hal_executable_plugin_strcmp(symbol_name, 
+        "simple_add_workgroup") == 0) {
+      params->out_fn_ptrs[i] = simple_add_workgroup;
       params->out_fn_contexts[i] = NULL;  // no context used, could be self
     } else {
       if (is_optional) {

@@ -162,9 +162,9 @@ set(_STANDALONE_PLUGIN_ARCH_LIBRARIES "")
 
 
 set(RISCV_STANDALONE_PLUGIN_ARCH_C_FLAGS -march=rv64i2p1ma2p1f2p2d2p2c2p0)
-standalone_plugin_library(_STANDALONE_PLUGIN_ARCH_LIBRARIES arm_64 "")
+#standalone_plugin_library(_STANDALONE_PLUGIN_ARCH_LIBRARIES arm_64 "")
 standalone_plugin_library(_STANDALONE_PLUGIN_ARCH_LIBRARIES x86_64 "")
-standalone_plugin_library(_STANDALONE_PLUGIN_ARCH_LIBRARIES riscv_64 "${RISCV_STANDALONE_PLUGIN_ARCH_C_FLAGS}")
+#standalone_plugin_library(_STANDALONE_PLUGIN_ARCH_LIBRARIES riscv_64 "${RISCV_STANDALONE_PLUGIN_ARCH_C_FLAGS}")
 
 add_custom_command(
   OUTPUT
